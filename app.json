@@ -1,0 +1,33 @@
+{
+  "name": "Vega",
+  "displayName": "Vega",
+  "expo": {
+    "name": "Vega",
+    "displayName": "Vega",
+    "autolinking": {
+      "exclude": ["expo-splash-screen"]
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "extraMavenRepos": [
+              "../../node_modules/@notifee/react-native/android/libs"
+            ]
+          },
+          "ios": {}
+        }
+      ]
+    ],
+    "slug": "vega",
+    "version": "2.5.5",
+    "sdkVersion": "51.0.0",
+    "android": {
+      "minSdkVersion": 24,
+      "package": "com.vega",
+      "versionCode": 80
+    },
+    "platforms": ["ios", "android"]
+  }
+}
