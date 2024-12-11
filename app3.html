@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Name 1 - DHR Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<header>
+    <h1>DHR Store</h1>
+</header>
+
+<!-- Floating Search Bar -->
+<!-- Floating search icon -->
+<div class="search-icon" onclick="toggleSearchBar()">
+    <img src="https://purepng.com/public/uploads/large/search-icon-lob.png" alt="Search Icon">
+</div>
+
+<!-- Hidden search bar that will appear when the search icon is clicked -->
+<div class="search-container" id="searchContainer">
+    <input type="text" id="searchInput" placeholder="Search for apps..." onkeyup="searchApps()">
+</div>
+
+<nav>
+    <a href="/index.html">Home</a>
+    <a href="#">Categories</a>
+    <a href="#">Top Charts</a>
+    <a href="#">Premium</a>
+</nav>
+<div id="resultsContainer"></div>
+
+<div class="app-details">
+    <img src="https://raw.githubusercontent.com/z-huang/InnerTune/dev/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" alt="App Icon" class="app-icon" style="background-color: black; background-radius: 5px;">
+    <h2>InnerTune</h2>
+     <p>Category: Productivity</p>
+    <p class="downloads">108+ downloads</p>
+    
+<!-- Rating -->
+<div class="rating">
+    <span id="user-rating">
+        ★ ★ ★ ★ ★
+    </span>
+    <p id="average-rating">4.9/5 (108 ratings)</p>
+</div>
+<input type="hidden" id="rating-value" value="0">
+<button id="submit-rating">Submit Rating</button>
+<div class="rating">
+    <span class="star" data-value="1">★</span>
+    <span class="star" data-value="2">★</span>
+    <span class="star" data-value="3">★</span>
+    <span class="star" data-value="4">★</span>
+    <span class="star" data-value="5">★</span>
+</div>
+    
+    <!-- Overview -->
+    <h3>Overview</h3>
+    <p class="description">
+        App open and login<br>play ad free any music<br> download ad free any <br> watch song video ad free<br> very advance UI system<br> play radio mode<br>best audio boot quality 5.7dlb<br>best app vfor music lover <br>auto playlist created<br>search through YouTube link<br>share through YouTube Spotify youtube music jio saavn</p>
+    
+    <h3>Screenshots</h3>
+    <div class="screenshots">
+     
+        <img src="/innerimage/Screenshot_2024-12-11-08-06-28-66_f4703f2d42345ac28c56f11a6100c500.jpg" alt="Screenshot 1">
+        <img src="/innerimage/Screenshot_2024-12-11-08-05-04-84_f4703f2d42345ac28c56f11a6100c500.jpg" alt="Screenshot 2">
+        <img src="/innerimage/Screenshot_2024-12-11-08-05-12-22_f4703f2d42345ac28c56f11a6100c500.jpg" alt="">
+        <img src="/innerimage/Screenshot_2024-12-11-08-07-18-01_f4703f2d42345ac28c56f11a6100c500.jpg" alt="">
+        <img src="/innerimage/Screenshot_2024-12-11-08-07-40-16_f4703f2d42345ac28c56f11a6100c500.jpg" alt="">
+    </div>
+
+    <a href="pri.html" class="download-btn">Download</a>
+</div>
+<script src="main.js"></script>
+
+<footer>
+    <p>&copy; 2024 DHR Store. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

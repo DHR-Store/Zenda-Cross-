@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHR Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+<header>
+    <h1>DHR Store</h1>
+</header>
+
+
+<!-- Floating Search Bar -->
+<!-- Floating search icon -->
+<div class="search-icon" onclick="toggleSearchBar()">
+    <img src="https://purepng.com/public/uploads/large/search-icon-lob.png" alt="Search Icon">
+</div>
+
+<!-- Hidden search bar that will appear when the search icon is clicked -->
+<div class="search-container" id="searchContainer">
+    <input type="text" id="searchInput" placeholder="Search for apps..." onkeyup="searchApps()" style="backgroung-radius: 50px;">
+</div>
+
+<!-- Hidden search bar that will appear when the search icon is clicked -->
+<nav>
+      <a href="#">Home</a>
+        <a href="/index.html" onclick="toggleDropdown('categoryMenu')">Category</a>
+        <a href="#" onclick="toggleDropdown('topChartsMenu')">Top Charts</a>
+        <a href="/pri.html">Premium</a>
+    </nav>
+
+    <!-- Dropdown Menus -->
+    <div id="categoryMenu" class="dropdown">
+        <a href="#">Games</a>
+        <a href="#">Education</a>
+        <a href="#">Entertainment</a>
+    </div>
+
+    <div id="topChartsMenu" class="dropdown">
+        <a href="#">Top Games</a>
+        <a href="#">Top Apps</a>
+        <a href="#">Top Movies</a>
+    </div>
+    
+  
+<div class="dropdown">
+        <div class="dropdown-content">
+            <a href="#option1">Option 1</a>
+            <a href="#option2">Option 2</a>
+            <a href="#option3">Option 3</a>
+        </div>
+    </div>
+    
+      <script>
+      
+      function toggleDropdown(menuId) {
+            // Hide all dropdowns first
+            document.querySelectorAll('.dropdown').forEach(menu => menu.style.display = 'none');
+
+            // Toggle the clicked dropdown menu
+            const menu = document.getElementById(menuId);
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
+            }
+        }
+
+        // Close dropdown if clicked outside
+        document.addEventListener('click', function (event) {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(menu => {
+                if (!menu.contains(event.target) && !menu.previousElementSibling.contains(event.target)) {
+                    menu.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+<div id="resultsContainer"></div>
+
+<div class="container">
+    <h2>Apps</h2>
+    <div class="grid" id="appsGrid">
+        <!-- Example App Cards -->
+        <div class="app-card" data-name="VegaArm">
+            <a href="app2.html">
+                <img src="/bootsplash_logo.png" alt="VegaArm" style="background-color: black; border-radius: 4px;">
+                <h3>VegaArm</h3>
+            </a>
+        </div>
+        
+        <div class="app-card" data-name="InnerTune">
+          <a href="app3.html">
+            <img src="https://raw.githubusercontent.com/z-huang/InnerTune/dev/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" alt="innerTune">
+            <h3>InnerTune</h3>
+          </a>
+        </div>
+        
+        <div class="app-card" data-name="Rimusic">
+          <a href="app4.html">
+            <img src="https://raw.githubusercontent.com/fast4x/RiMusic/master/assets/design/latest/app_logo.svg" alt="Rimusic">
+            <h3>Rimusic</h3>
+          </a>
+        </div>
+        
+        <div class="app-card" data-name="YT-pro">
+          <a href="app5.html">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ50BDuEKbr3v2a3ra-ATKpangll-cv3659YOxiV5P7aZfM2aoZ8oBA_Fc&s=10" alt="App">
+            <h3>Youtube-Pro</h3>
+          </a>
+        </div>
+        <center>
+        <p>more app coming soon......</p></center>
+     
+        <!---
+        <div class="app-card" data-name="App Name 1">
+          <a href="app1.html">
+            <img src="images/app1-icon.jpg" alt="App 1">
+            <h3>App Name 1</h3>
+          </a>
+        </div>
+        
+        <div class="app-card" data-name="App Name 1">
+          <a href="app1.html">
+            <img src="images/app1-icon.jpg" alt="App 1">
+            <h3>App Name 1</h3>
+          </a>
+        </div>
+        
+        <div class="app-card" data-name="App Name 1">
+          <a href="app1.html">
+            <img src="images/app1-icon.jpg" alt="App 1">
+            <h3>App Name 1</h3>
+          </a>
+        </div>
+
+        <!-- Add more apps as needed -->
+    </div>
+</div>
+
+<script src="main.js"></script>
+
+<footer>
+    <p>&copy; 2024 DHR Store. All rights reserved.
+    <a href="">contect</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Password</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #payment-form, #verify-payment, #success-message {
+            background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 400px;
+            margin: 20px 0;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 25px;
+            margin: 10px 0;
+            transition: background 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        button:hover {
+            background: #43a047;
+            transform: scale(1.05);
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1rem;
+        }
+        h3 {
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <h1>Buy key</h1>
+    <p>To download DHR-store's ad free premium app, buy DHR-store's app download key 1 year subscription key for just 1 rupee and enjoy your life without any interference.</p>
+
+    <div id="payment-form">
+        <p>Click the button below to pay ₹1 buy key:</p>
+        <h3>DHR-store©2024</h3>
+        <button onclick="openUPIPayment()">Pay ₹1</button>
+    </div>
+
+    <div id="verify-payment" style="display: none;">
+        <p>Enter your UPI Transaction ID:</p>
+        <input type="text" id="transaction-id" placeholder="Enter Transaction ID" required>
+        <button onclick="verifyPayment()">Verify Payment and generateKey</button>
+    </div>
+
+    <div id="success-message" style="display: none;">
+        <p>Payment Successful! Here is your key:</p>
+        <p id="generated-key" style="font-weight: bold; color: #ffd700;"></p>
+        <button onclick="loginWithKey()">Login Now</button>
+    </div>
+
+    <script>
+        function openUPIPayment() {
+            window.location.href = "upi://pay?pa=dheerajarukamprees-2@oksbi&pn=DHR-store&am=1&cu=INR";
+            alert("Complete the payment in your UPI app and come back to verify.");
+            document.getElementById('payment-form').style.display = "none";
+            document.getElementById('verify-payment').style.display = "block";
+        }
+
+        function generateKey() {
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            let key = "";
+            for (let i = 0; i < 10; i++) {
+                key += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return key;
+        }
+
+        function verifyPayment() {
+            const transactionId = document.getElementById('transaction-id').value.trim();
+
+            if (transactionId) {
+                alert("Verifying payment...");
+                setTimeout(() => {
+                    if (transactionId.startsWith("T")) {
+                        document.getElementById('verify-payment').style.display = "none";
+                        document.getElementById('success-message').style.display = "block";
+                        const key = generateKey();
+                        document.getElementById('generated-key').textContent = key;
+                        localStorage.setItem("accessKey", key);
+                    } else {
+                        alert("Payment verification failed. Please try again with a valid Transaction ID.");
+                    }
+                }, 2000);
+            } else {
+                alert("Please enter a valid Transaction ID!");
+            }
+        }
+
+        function loginWithKey() {
+            const key = localStorage.getItem("accessKey");
+            if (key) {
+                window.location.href = `pri.html?key=${key}`;
+            }
+        }
+    </script>
+</body>
+</html>

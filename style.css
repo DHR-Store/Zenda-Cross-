@@ -1,0 +1,299 @@
+/* Deep mind relaxation color night animation */
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    color: #e0e0e0; /* Soft text color for better readability */
+    position: relative;
+    z-index: 1;
+    background: url('https://64.media.tumblr.com/8f1b387b2d16c5ab7992542524e9f8a2/tumblr_p05tdiqHxv1uzwgsuo1_400.gif') no-repeat center center fixed; /* Add your GIF URL here */
+    background-size: cover; /* Ensures the GIF covers the entire screen */
+}
+
+/* Ensure that other content is on top of the background */
+.container {
+    position: relative;
+    z-index: 99;
+}
+/* Style the header */
+header {
+    background-color: #1a73e8;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.4); /* 0.5 transparency */
+    border-radius: 5px;
+}
+
+.result-item {
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.no-result {
+  padding: 5px;
+  color: red;
+}
+/* Floating search icon */
+.search-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #1a73e8;
+    border-radius: 30%;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 100;
+  background-color: rgba(0, 0, 0, 0.7); /* 0.5 transparency */
+}
+
+.search-icon img {
+    width: 30px;
+    height: 30px;
+    color: white;
+    background: transparent;
+}
+
+/* Style the search bar container */
+.search-container {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 10px;
+    left: 0;
+    width: 98%;
+    background-color: url('https://64.media.tumblr.com/8f1b387b2d16c5ab7992542524e9f8a2/tumblr_p05tdiqHxv1uzwgsuo1_400.gif');
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    padding: 10px;
+    z-index: 1000;
+    border-radius: 15px;
+}
+
+#searchInput {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin: 10px auto;
+    display: block;
+}
+
+#searchInput:focus {
+    border-color: #1a73e8;
+}
+
+
+    
+nav {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f1f3f4;
+    padding: 10px 0;
+    border-radius: 7px;
+}
+
+nav a {
+    color: #5f6368;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #1a73e8;
+}
+
+.dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        .dropdown a {
+            color: black;
+            padding: 10px 15px;
+            display: block;
+            text-align: left;
+        }
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.app-card {
+    background-color: ghostwhite;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 10px;
+    transition: transform 0.3s;
+}
+
+.app-card:hover {
+    transform: scale(1.05);
+}
+
+.app-card img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.app-card h3 {
+    font-size: 16px;
+    color: #202124;
+}
+
+.app-details {
+    padding: 20px;
+    background-color: white;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.app-icon {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.screenshots img {
+    width: 100%;
+    max-width: 50px;
+    margin: 10px;
+    display: inline-block;
+    border-radius: 8px;
+    
+}
+/* App downloads */
+.downloads {
+    font-size: 18px;
+    color: #5f6368;
+    margin: 10px 0;
+}
+
+/* Rating section */
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    font-family: Arial, sans-serif;
+}
+
+#user-rating {
+    font-size: 2em;
+    color: gold; /* Golden color for stars */
+}
+
+#average-rating {
+    font-size: 1rem;
+    color: #5f6368;
+}
+
+/* Rating section */
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    justify-content: center; /* Center align the stars */
+}
+
+.rating span {
+    font-size: 2em; /* Star size */
+    cursor: pointer; /* Pointer cursor when hovering */
+    color: gray; /* Default gray color for stars */
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.rating span.active {
+    color: gold; /* Golden color for active (selected) stars */
+}
+
+.rating p {
+    font-size: 16px;
+    color: #5f6368;
+    margin-left: 20px;
+}
+
+/* Submit button styling */
+#submit-rating {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+#submit-rating:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#submit-rating:active {
+    transform: scale(0.95);
+}
+
+
+/* Description section */
+.description {
+    font-size: 16px;
+    color: #202124;
+    line-height: 1.6;
+    margin: 10px 0 20px;
+}
+
+
+.screenshots {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    padding: 10px 0;
+    scroll-snap-type: x mandatory; /* Smooth snap scrolling */
+}
+
+.screenshots img {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 130px;
+    border-radius: 8px;
+    scroll-snap-align: center; /* Snap to center of the viewport */
+}
+
+.download-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #1a73e8;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.download-btn:hover {
+    background-color: #1664c0;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #1a73e8;
+    color: white;
+    margin-top: 1300px;
+}

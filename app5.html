@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHR Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<header>
+    <h1>DHR Store</h1>
+</header>
+
+<!-- Floating Search Bar -->
+<!-- Floating search icon -->
+<div class="search-icon">
+  <a href="/index.html">
+    <img src="https://purepng.com/public/uploads/large/search-icon-lob.png" alt="Search Icon"></a>
+</div>
+
+<!-- Hidden search bar that will appear when the search icon is clicked -->
+<div class="search-container" id="searchContainer">
+    <input type="text" id="searchInput" placeholder="Search for apps..." onkeyup="searchApps()">
+</div>
+
+<nav>
+    <a href="/index.html">Home</a>
+    <a href="#">Categories</a>
+    <a href="#">Top Charts</a>
+    <a href="#">Premium</a>
+</nav>
+<div id="resultsContainer"></div>
+
+<div class="app-details">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ50BDuEKbr3v2a3ra-ATKpangll-cv3659YOxiV5P7aZfM2aoZ8oBA_Fc&s=10" alt="App Icon" class="app-icon" style="background-color: black; background-radius: 5px;">
+    <h2>Youtube-Pro</h2>
+     <p>Category: Productivity</p>
+    <p class="downloads">43+ downloads</p>
+    
+<!-- Rating -->
+<div class="rating">
+    <span id="user-rating">
+        ★ ★ ★ ★ ★
+    </span>
+    <p id="average-rating">5/5 (38 ratings)</p>
+</div>
+<input type="hidden" id="rating-value" value="0">
+<button id="submit-rating">Submit Rating</button>
+<div class="rating">
+    <span class="star" data-value="1">★</span>
+    <span class="star" data-value="2">★</span>
+    <span class="star" data-value="3">★</span>
+    <span class="star" data-value="4">★</span>
+    <span class="star" data-value="5">★</span>
+</div>
+    
+    <!-- Overview -->
+    <h3>Overview</h3>
+    <p class="description">
+        Watch YouTube Ad free<br>
+        All features of Youtube official<br>Download Youtube video directly into personal Storage<br>Pip allowed pictures in picture over the app<br>
+        Background Mp3 play allowed enjoying listening song by youtube video<br>Download Mp3 from video<br> App size 37.9kb only<br> upload not supported<br> add your personal youtube account and contact both history and play video ad free</p>
+    
+    <h3>Screenshots</h3>
+    <div class="screenshots">
+     
+        <img src="/images/IMG_20241211_025414.jpg" alt="Screenshot 1">
+        <img src="/images/Screenshot_2024-12-11-02-51-53-96_2b498b5ca651952f33ef39d01aa0f41c.jpg" alt="Screenshot 2">
+        <img src="/images/Screenshot_2024-12-11-02-52-00-34_2b498b5ca651952f33ef39d01aa0f41c.jpg" alt="">
+        <img src="/images/Screenshot_2024-12-11-02-52-14-02_2b498b5ca651952f33ef39d01aa0f41c.jpg" alt="">
+        <img src="/images/IMG_20241211_025509.jpg" alt="">
+        <img src="/images/IMG_20241211_025528.jpg" alt="">
+        <img src="/images/Screenshot_2024-12-11-02-52-22-89_2b498b5ca651952f33ef39d01aa0f41c.jpg" alt="">
+        <img src="/images/Screenshot_2024-12-11-02-53-02-33_2b498b5ca651952f33ef39d01aa0f41c.jpg" alt="">
+        
+    </div>
+
+    <a href="/pri.html" class="download-btn">Download</a>
+</div>
+<script src="main.js"></script>
+
+<footer>
+    <p>&copy; 2024 DHR Store. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHR Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<header>
+    <h1>DHR Store</h1>
+</header>
+
+<!-- Floating Search Bar -->
+<!-- Floating search icon -->
+<div class="search-icon">
+  <a href="/index.html">
+    <img src="https://purepng.com/public/uploads/large/search-icon-lob.png" alt="Search Icon"></a>
+</div>
+
+<!-- Hidden search bar that will appear when the search icon is clicked -->
+<div class="search-container" id="searchContainer">
+    <input type="text" id="searchInput" placeholder="Search for apps..." onkeyup="searchApps()">
+</div>
+
+<nav>
+    <a href="/index.html">Home</a>
+    <a href="#">Categories</a>
+    <a href="#">Top Charts</a>
+    <a href="#">Premium</a>
+</nav>
+<div id="resultsContainer"></div>
+
+<div class="app-details">
+    <img src="/bootsplash_logo.png" alt="App Icon" class="app-icon" style="background-color: black; background-radius: 5px;">
+    <h2>VegaArm</h2>
+     <p>Category: Productivity</p>
+    <p class="downloads">108+ downloads</p>
+    
+<!-- Rating -->
+<div class="rating">
+    <span id="user-rating">
+        ★ ★ ★ ★ ★
+    </span>
+    <p id="average-rating">4.9/5 (108 ratings)</p>
+</div>
+<input type="hidden" id="rating-value" value="0">
+<button id="submit-rating">Submit Rating</button>
+<div class="rating">
+    <span class="star" data-value="1">★</span>
+    <span class="star" data-value="2">★</span>
+    <span class="star" data-value="3">★</span>
+    <span class="star" data-value="4">★</span>
+    <span class="star" data-value="5">★</span>
+</div>
+    
+    <!-- Overview -->
+    <h3>Overview</h3>
+    <p class="description">
+        Through this app you can watch newly released movies, web series, Netflix, Amazon prime video for free and also download them for free. There is no ad in this app. The UI of this app is advanced.This app comes with a good feature but consumes less data<br>Watch according web season, episode and release date<br>Also download according to watching<br>Dynamic UI system make advance</p>
+    
+    <h3>Screenshots</h3>
+    <div class="screenshots">
+     
+        <img src="/vgimage/Screenshot_2024-12-11-07-46-55-47_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="Screenshot 1">
+        <img src="/vgimage/Screenshot_2024-12-11-07-48-24-57_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="Screenshot 2">
+        <img src="/vgimage/Screenshot_2024-12-11-07-47-59-38_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="">
+        <img src="/vgimage/Screenshot_2024-12-11-07-51-52-60_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="">
+        <img src="/vgimage/Screenshot_2024-12-11-07-48-05-30_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="">
+    </div>
+
+    <a href="/pri.html" class="download-btn">Download</a>
+</div>
+<script src="main.js"></script>
+
+<footer>
+    <p>&copy; 2024 DHR Store. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
