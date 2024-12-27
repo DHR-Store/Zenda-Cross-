@@ -181,6 +181,16 @@ nav a:hover {
     color: #5f6368;
     margin: 10px 0;
 }
+.how-download {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #1a73e8;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
 
 /* Rating section */
 .rating {
