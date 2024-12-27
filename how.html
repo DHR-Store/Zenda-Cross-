@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screenshot Gallery</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      padding: 20px;
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>How to install</h1>
+    <p>step by step </p>
+  </header>
+  <div class="gallery">
+    <img src="/hiwimg/IMG_20241227_181321.jpg" alt="Screenshot 1">
+    <img src="/hiwimg/Screenshot_2024-12-27-18-09-16-19_40deb401b9ffe8e1df2f1cc5ba480b12.jpg" alt="Screenshot 2">
+    <img src="/hiwimg/IMG_20241227_181349.jpg" alt="Screenshot 3">
+    <img src="/hiwimg/IMG_20241227_181410.jpg" alt="Screenshot 4">
+    <img src="/hiwimg/IMG_20241227_181425.jpg" alt="Screenshot 5">
+  </div>
+</body>
+</html>
