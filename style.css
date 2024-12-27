@@ -295,6 +295,15 @@ nav a:hover {
     text-decoration: none;
     border-radius: 5px;
 }
+.how-download {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #1a73e8;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
 
 .download-btn:hover {
     background-color: #1664c0;
