@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHR Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<header>
+    <h1>DHR Store</h1>
+</header>
+
+<!-- Floating Search Bar -->
+<!-- Floating search icon -->
+<div class="search-icon">
+  <a href="/index.html">
+    <img src="https://purepng.com/public/uploads/large/search-icon-lob.png" alt="Search Icon"></a>
+</div>
+
+<!-- Hidden search bar that will appear when the search icon is clicked -->
+<div class="search-container" id="searchContainer">
+    <input type="text" id="searchInput" placeholder="Search for apps..." onkeyup="searchApps()">
+</div>
+
+<nav>
+    <a href="/index.html">Home</a>
+    <a href="#">Categories</a>
+    <a href="#">Top Charts</a>
+    <a href="#">Premium</a>
+</nav>
+<div id="resultsContainer"></div>
+
+<div class="app-details">
+    <img src="https://raw.githubusercontent.com/dstark5/Openlib/main/assets/icons/appIcon.png" alt="App Icon" class="app-icon" style="background-color: black; background-radius: 5px;">
+    <h2>Openlib</h2>
+     <p>Category: Productivity</p>
+    <p class="downloads">460+ downloads</p>
+    
+<!-- Rating -->
+<div class="rating">
+    <span id="user-rating">
+        ★ ★ ★ ★ ★
+    </span>
+    <p id="average-rating">5/5 (380 ratings)</p>
+</div>
+<input type="hidden" id="rating-value" value="0">
+<button id="submit-rating">Submit Rating</button>
+<div class="rating">
+    <span class="star" data-value="1">★</span>
+    <span class="star" data-value="2">★</span>
+    <span class="star" data-value="3">★</span>
+    <span class="star" data-value="4">★</span>
+    <span class="star" data-value="5">★</span>
+</div>
+    
+    <!-- Overview -->
+    <h3>Overview</h3>
+    <p class="description">
+        Read all types book free<br>
+        Trending Books<br>
+Download And Read Books With In-Built Viewer<br>
+Supports Epub And Pdf Formats
+<br>
+Open Books In Your Favourite Ebook Reader
+Filter Books<br>
+Adding More Book Format supports (cbz,cbr,azw3,etc...)
+<br>
+Adding Support For Background Downloads
+<br>
+Adding Support For Multiple Downloads
+<br>
+Move existing books when changing the storage path.
+<br>
+Sort Books</p>
+    
+    <h3>Screenshots</h3>
+    <div class="screenshots">
+     
+        <img src="https://raw.githubusercontent.com/dstark5/Openlib/main/screenshots/Screenshot_1.png" alt="Screenshot 1">
+        <img src="https://raw.githubusercontent.com/dstark5/Openlib/main/screenshots/Screenshot_2.png" alt="Screenshot 2">
+        <img src="https://raw.githubusercontent.com/dstark5/Openlib/main/screenshots/Screenshot_3.png" alt="">
+        <img src="https://raw.githubusercontent.com/dstark5/Openlib/main/screenshots/Screenshot_4.png" alt="">
+        <img src="https://raw.githubusercontent.com/dstark5/Openlib/main/screenshots/Screenshot_5.png" alt="">
+        <img src="https://raw.githubusercontent.com/dstark5/Openlib/main/screenshots/Screenshot_6.png" alt="">
+        <img src="https://raw.githubusercontent.com/dstark5/Openlib/main/screenshots/Screenshot_7.png" alt="">
+        <img src="https://raw.githubusercontent.com/dstark5/Openlib/main/screenshots/Screenshot_8.png" alt="">
+        
+    </div>
+
+    <a href="/pri.html" class="download-btn">Download</a>
+    <br>
+      <a href="how.html" class="how-download">how to download</a>
+</div>
+<script src="main.js"></script>
+
+<footer>
+    <p>&copy; 2024 DHR Store. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
