@@ -24,6 +24,34 @@ function searchApps() {
     }
 }
 
+ // Get the modal
+    const modal = document.getElementById("imageModal");
+    const modalImage = document.getElementById("modalImage");
+    const closeModal = document.getElementById("modalClose");
+
+    // Add click event to screenshots
+    document.querySelectorAll(".screenshot").forEach(img => {
+        img.addEventListener("click", function () {
+            modal.style.display = "block";
+            modalImage.src = this.src;
+        });
+    });
+
+    // Close the modal when clicking the "x"
+    closeModal.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    // Close the modal when clicking outside the image
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+
+
+
+
 
 function toggleDropdown(menuId) {
             // Hide all dropdowns first
