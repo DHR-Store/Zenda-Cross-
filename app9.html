@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHR Store</title>
+    <link rel="stylesheet" href="style.css">
+   
+</head>
+<body>
+<header>
+    <h1>DHR Store</h1>
+</header>
+
+<!-- Floating Search Bar -->
+<div class="search-icon">
+  <a href="index.html">
+    <img src="https://purepng.com/public/uploads/large/search-icon-lob.png" alt="Search Icon"></a>
+</div>
+<!-- Hidden search bar that will appear when the search icon is clicked -->
+<div class="search-container" id="searchContainer">
+    <input type="text" id="searchInput" placeholder="Search for apps..." onkeyup="searchApps()">
+</div>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="pri.html">Categories</a>
+    <a href="pri.html">Top Charts</a>
+    <a href="pri.html">Premium</a>
+</nav>
+<div id="resultsContainer"></div>
+
+<div class="app-details">
+    <img src="aniTeamsimg/IMG_20250121_193031.jpg" alt="App Icon" class="app-icon" style="background-color: black; background-radius: 5px;">
+    <h2>aniTeams</h2>
+     <p>Category: Entertainment</p>
+    <p class="downloads">20+ downloads</p>
+    
+<!-- Rating -->
+<div class="rating">
+    <span id="user-rating">
+        ★ ★ ★ ★ ★
+    </span>
+    <p id="average-rating">5/5 (16 ratings)</p>
+</div>
+<input type="hidden" id="rating-value" value="0">
+<button id="submit-rating">Submit Rating</button>
+<div class="rating">
+    <span class="star" data-value="1">★</span>
+    <span class="star" data-value="2">★</span>
+    <span class="star" data-value="3">★</span>
+    <span class="star" data-value="4">★</span>
+    <span class="star" data-value="5">★</span>
+</div>
+    
+    <!-- Overview -->
+    <h3>Overview</h3>
+    <p class="description">
+       • Watch All type Anime
+        <br>
+•Multiple Languages 
+<br>
+•Multiple subtitles 
+•Multiple sources 
+<br>
+•Dynamic UI
+<br>
+•All gestures Controller 
+<br>
+•Full Episode and Full upcoming season 
+<br>
+•Video quality multiple type 4k , 1080pHD, advanced medium,low 
+<br>
+•Low data Consumption 
+<br>
+•Download all type with Dubbed Audio 
+<br>
+•Sever Cruchyroll, Hianime,gogo, Rido, etc.
+    
+    <h3>Screenshots</h3>
+    <div class="screenshots">
+        <img src="aniTeamsimg/Screenshot_2025-01-21-19-36-24-48_8042436a9dde4b8750fc6419ac39f9e6.jpg" alt="Screenshot 1" class="screenshot">
+        <img src="aniTeamsimg/Screenshot_2025-01-21-20-04-04-36_8042436a9dde4b8750fc6419ac39f9e6.jpg" alt="Screenshot 2" class="screenshot">
+        <img src="aniTeamsimg/Screenshot_2025-01-21-19-36-29-88_8042436a9dde4b8750fc6419ac39f9e6.jpg" alt="Screenshot 3" class="screenshot">
+        <img src="aniTeamsimg/Screenshot_2025-01-21-19-36-54-24_8042436a9dde4b8750fc6419ac39f9e6.jpg" alt="screenshot5" class="screenshot" >
+        <img src="aniTeamsimg/Screenshot_2025-01-21-19-41-05-57_8042436a9dde4b8750fc6419ac39f9e6.jpg" alt="" class="screenshot">
+        <img src="aniTeamsimg/Screenshot_2025-01-21-19-41-16-06_8042436a9dde4b8750fc6419ac39f9e6.jpg" alt="" class="screenshot">
+        <img src="aniTeamsimg/Screenshot_2025-01-21-19-41-54-93_8042436a9dde4b8750fc6419ac39f9e6.jpg" alt="" class="screenshot">
+        <img src="animeTVimg/IMG_20250121_130814.jpg" alt="" class="screenshot">
+        
+    </div>
+
+    <a href="" class="download-btn">Download</a>
+    <br>
+    <a href="how.html" class="how-download">How to Download </a>
+</div>
+
+<!-- Modal for Enlarged Image -->
+<div id="imageModal" class="modal">
+    <span class="close" id="modalClose">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+
+<script src="main.js"></script>
+
+
+<footer>
+    <p>&copy; 2024 DHR Store. All rights reserved.</p>
+</footer>
+</body>
+</html>
