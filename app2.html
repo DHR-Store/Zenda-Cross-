@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +5,145 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DHR Store</title>
     <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* General button styling for headers */
+        .version-header {
+            /* HIGH CONTRAST TEXT */
+            color: #1a73e8; /* White text for contrast */
+            padding: 14px 20px; /* Increased padding */
+            margin-top: 20px;
+            margin-bottom: 0;
+            border-radius: 8px; 
+            background-color: #ff4d00db;
+            cursor: pointer;
+            font-size: 1.4em; /* Larger font size */
+            font-weight: 700; /* Extra bold text */
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth on text */
+            
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease-in-out;
+            user-select: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+        }
+
+        .version-header:hover {
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Specific color for the 'Coming Soon' (newer) version - Green is prominent */
+        .version-block:first-child .version-header {
+            background-color: #28a745; 
+        }
+        
+        .version-block:first-child .version-header:hover {
+            background-color: #218838; 
+        }
+
+        /* Color for older versions - Blue is stable */
+        .version-block:nth-child(2) .version-header {
+            background-color: #007bff;
+        }
+
+        .version-block:nth-child(2) .version-header:hover {
+            background-color: #0056b3; 
+        }
+        
+        /* Ensures the arrow is visible and separated from the text */
+        .toggle-arrow {
+            font-size: 1.2em;
+            margin-left: 15px; /* Adds space between text and arrow */
+        }
+        
+        /* Styling for the content that drops down */
+        .download-links {
+            border: 1px solid #dee2e6;
+            border-top: none;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            background-color: #f8f9fa; 
+        }
+
+        /* Style for the actual download buttons inside the links block */
+        .download-links .download-btn {
+            background-color: #ffc107;
+            color: #333;
+            padding: 10px 18px; /* Bigger button */
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-right: 10px;
+            transition: background-color 0.2s;
+        }
+
+        .download-links .download-btn:hover {
+            background-color: #e0a800; 
+        }
+
+        /* ------------------------------------------- */
+/* 1. Shine Animation Keyframes */
+/* ------------------------------------------- */
+@keyframes color-shift-shine {
+    0% { 
+        background-color: #ffc107; /* Yellow */
+        box-shadow: 0 0 5px rgba(255, 193, 7, 0.5); 
+    }
+    33% { 
+        background-color: #17a2b8; /* Cyan/Info */
+        box-shadow: 0 0 8px rgba(23, 162, 184, 0.7); 
+    }
+    66% { 
+        background-color: #dc3545; /* Red/Danger */
+        box-shadow: 0 0 5px rgba(220, 53, 69, 0.5); 
+    }
+    100% { 
+        background-color: #ffc107; /* Back to Yellow */
+        box-shadow: 0 0 5px rgba(255, 193, 7, 0.5); 
+    }
+}
+
+/* ------------------------------------------- */
+/* 2. Apply Animation to Download Buttons */
+/* ------------------------------------------- */
+.download-links .download-btn {
+    /* Override existing styling */
+    color: #fff !important; /* Force white text for better contrast on changing backgrounds */
+    padding: 12px 20px;
+    border-radius: 8px; /* Slightly more prominent */
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 10px;
+    
+    /* Animation Properties */
+    animation: color-shift-shine 12s infinite ease-in-out; /* Apply the shifting animation */
+    transition: none; /* Disable standard hover transition to let animation dominate */
+}
+
+.download-links .download-btn:hover {
+    /* Subtle pulsing effect on hover, still using the animation colors */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+}
+
+/* ------------------------------------------- */
+/* 3. Style the Descriptive Text */
+/* ------------------------------------------- */
+.download-links p {
+    /* Makes the accompanying text slightly glow and stand out */
+    color: #495057; /* Dark gray text color */
+    font-weight: 600; /* Bolder text */
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.05); /* Subtle inner shadow/glow */
+    display: inline-block; /* Aligns text next to the button */
+    margin-left: 5px;
+}
+    </style>
+    
 </head>
 <body>
 
@@ -14,14 +152,11 @@
     <h1>DHR Store</h1>
 </header>
 
-<!-- Floating Search Bar -->
-<!-- Floating search icon -->
 <div class="search-icon">
-  <a href="index.html">
-    <img src="https://purepng.com/public/uploads/large/search-icon-lob.png" alt="Search Icon"></a>
+    <a href="index.html">
+        <img src="https://purepng.com/public/uploads/large/search-icon-lob.png" alt="Search Icon"></a>
 </div>
 
-<!-- Hidden search bar that will appear when the search icon is clicked -->
 <div class="search-container" id="searchContainer">
     <input type="text" id="searchInput" placeholder="Search for apps..." onkeyup="searchApps()">
 </div>
@@ -37,10 +172,9 @@
 <div class="app-details">
     <img src="https://raw.githubusercontent.com/Zenda-Cross/vega-app/refs/heads/main/assets/bootsplash/logo%404x.png" alt="App Icon" class="app-icon" style="background-color: black; background-radius: 5px;">
     <h2>Vega-Next</h2>
-     <p>Category: Productivity</p>
+    <p>Category: Productivity</p>
     <p class="downloads">921+ downloads</p>
     
-<!-- Rating -->
 <div class="rating">
     <span id="user-rating">
         ★ ★ ★ ★ ★
@@ -57,14 +191,12 @@
     <span class="star" data-value="5">★</span>
 </div>
     
-    <!-- Overview -->
     <h3>Overview</h3>
     <p class="description">
         Through this app you can watch newly released movies, web series, Netflix, Amazon prime video for free and also download them for free. There is no ad in this app. The UI of this app is advanced.This app comes with a good feature but consumes less data<br>Watch according web season, episode and release date<br>Also download according to watching<br>Dynamic UI system make advance<br>5000+ live TV channel</p>
     
     <h3>Screenshots</h3>
     <div class="screenshots">
-     
         <img src="vgimage/Screenshot_2025-01-21-14-16-23-85_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="Screenshot 1" class="screenshot">
         <img src="vgimage/Screenshot_2024-12-11-07-48-24-57_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="Screenshot 2" class="screenshot">
         <img src="vgimage/Screenshot_2024-12-11-07-47-59-38_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="" class="screenshot">
@@ -75,22 +207,113 @@
         <img src="vgimage/IMG_20250121_142035.jpg" alt="8" class="screenshot">
         <img src="vgimage/IMG_20250121_142044.jpg" alt="9" class="screenshot">
         <img src="vgimage/IMG_20250121_142053.jpg" alt="10" class="screenshot">
-          </div>
-<h2>v3.3.3</h2>
-    <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android version/Android TV</p>
-    <br>
-      <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release.apk?download=" class="download-btn">Download</a><p>for 7 android version</p>
-    <br>
-<a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release.apk?download=" class="download-btn">Download</a><p>Universal for every Devices</p>
+    </div>
+
+    <div class="version-block">
+        <h2 class="version-header">v3.3.4 <span class="toggle-arrow">👇</span></h2>
+        
+        <div class="download-links" style="display: none;">
+            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release4.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android version/Android TV</p>
+            <br>
+            
+            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release4.apk?download=" class="download-btn">Download</a><p>for 7 android version</p>
+            <br>
+            
+            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release4.apk?download=" class="download-btn">Download</a><p>Universal for every Devices</p>
+        </div>
+    </div>
+    
+    <div class="version-block">
+        <h2 class="version-header">v3.3.3 <span class="toggle-arrow">👇</span></h2>
+        
+        <div class="download-links" style="display: none;">
+            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android version/Android TV</p>
+            <br>
+            
+            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release.apk?download=" class="download-btn">Download</a><p>for 7 android version</p>
+            <br>
+            
+            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release.apk?download=" class="download-btn">Download</a><p>Universal for every Devices</p>
+        </div>
+    </div>
+    
     <a href="how.html" class="how-download">how to download</a>
     <a href="https://vegaapp.vercel.app/" class="download-btn">Try Vega</a>
 </div>
-    <!-- Modal for Enlarged Image -->
+    
 <div id="imageModal" class="modal">
     <span class="close" id="modalClose">&times;</span>
     <img class="modal-content" id="modalImage">
 </div>
-<script src="main.js"></script>
+
+<script>
+    // This function will handle the click for ANY version header
+    function toggleDownloads(event) {
+        const header = event.currentTarget;
+        const downloadsDiv = header.nextElementSibling;
+        
+        // Find the arrow element inside the header
+        const arrow = header.querySelector('.toggle-arrow');
+
+        if (downloadsDiv && downloadsDiv.classList.contains('download-links')) {
+            if (downloadsDiv.style.display === 'none' || downloadsDiv.style.display === '') {
+                // Show the downloads and change the arrow
+                downloadsDiv.style.display = 'block'; 
+                if (arrow) arrow.textContent = '👆'; // Change to up arrow
+            } else {
+                // Hide the downloads and change the arrow back
+                downloadsDiv.style.display = 'none';
+                if (arrow) arrow.textContent = '👇'; // Change to down arrow
+            }
+        }
+    }
+
+    // Existing search function (placeholder)
+    function searchApps() {
+        // Implement your app search logic here if necessary
+        console.log("Searching for apps...");
+    }
+
+    // Attach all event listeners after the DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Version Toggle Logic: Selects ALL elements with the class 'version-header'
+        const versionHeaders = document.querySelectorAll('.version-header');
+        
+        versionHeaders.forEach(header => {
+            // Attach the listener
+            header.addEventListener('click', toggleDownloads);
+        });
+        
+        // 2. Screenshot Modal functionality
+        const screenshots = document.querySelectorAll('.screenshot');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalClose = document.getElementById('modalClose');
+
+        screenshots.forEach(screenshot => {
+            screenshot.addEventListener('click', function() {
+                modal.style.display = "block";
+                modalImage.src = this.src;
+            });
+        });
+        
+        if (modalClose) {
+            modalClose.addEventListener('click', () => {
+                modal.style.display = "none";
+            });
+        }
+        
+        // 3. Rating logic
+        const stars = document.querySelectorAll('.rating .star');
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const value = this.getAttribute('data-value');
+                document.getElementById('rating-value').value = value;
+                // Add visual feedback (e.g., coloring the stars)
+            });
+        });
+    });
+</script>
 
 <footer>
     <p>&copy; 2024 DHR Store. All rights reserved.</p>
