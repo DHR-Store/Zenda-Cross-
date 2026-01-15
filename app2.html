@@ -3,61 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DHR Store</title>
-    <link rel="stylesheet" href="style.css">
-    
+    <title>DHR Store - Vega-Next</title>
     <style>
-        /* General button styling for headers */
+        /* BASE STYLES & RESET */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* HEADER & NAV */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        
+        nav {
+            background-color: #444;
+            padding: 10px;
+            text-align: center;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        /* SEARCH */
+        .search-icon { text-align: center; margin-top: 15px; }
+        .search-icon img { width: 30px; }
+        
+        .search-container {
+            text-align: center;
+            margin: 10px 0 20px 0;
+            display: none;
+        }
+        
+        .search-container input {
+            padding: 10px;
+            width: 80%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        /* APP DETAILS CONTAINER */
+        .app-details {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            display: block;
+            margin: 0 auto 15px;
+        }
+
+        h2, h3 { color: #333; }
+        
+        /* RATING STARS */
+        .rating { color: #ffc107; font-size: 1.2em; margin-bottom: 10px; }
+        .rating .star { cursor: pointer; font-size: 1.5em; }
+
+        /* SCREENSHOTS */
+        .screenshots {
+            display: flex;
+            overflow-x: scroll;
+            gap: 10px;
+            padding-bottom: 10px;
+        }
+        .screenshot {
+            max-height: 250px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .screenshot:hover { transform: scale(1.05); }
+
+        /* ------------------------------------------- */
+        /* VERSION HEADER STYLING */
+        /* ------------------------------------------- */
         .version-header {
-            /* HIGH CONTRAST TEXT */
-            color: #1a73e8; /* White text for contrast */
-            padding: 14px 20px; /* Increased padding */
+            color: #fff; 
+            padding: 14px 20px; 
             margin-top: 20px;
             margin-bottom: 0;
             border-radius: 8px; 
             background-color: #ff4d00db;
             cursor: pointer;
-            font-size: 1.4em; /* Larger font size */
-            font-weight: 700; /* Extra bold text */
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth on text */
-            
+            font-size: 1.4em; 
+            font-weight: 700; 
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); 
             display: flex;
             justify-content: space-between;
             align-items: center;
             transition: all 0.2s ease-in-out;
             user-select: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); 
         }
 
-        .version-header:hover {
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-        }
+        .version-header:hover { box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); }
 
-        /* Specific color for the 'Coming Soon' (newer) version - Green is prominent */
-        .version-block:first-child .version-header {
-            background-color: #28a745; 
-        }
+        /* Version Colors - Mobile Default */
+        .version-block:first-of-type .version-header { background-color: #28a745; }
+        .version-block:nth-of-type(2) .version-header { background-color: #007bff; }
+
+        /* TV Version Specific Colors (Purple Theme) */
+        #tv-versions .version-header { background-color: #6f42c1; }
+        #tv-versions .version-header:hover { background-color: #5a32a3; }
+
+        .toggle-arrow { font-size: 1.2em; margin-left: 15px; }
         
-        .version-block:first-child .version-header:hover {
-            background-color: #218838; 
-        }
-
-        /* Color for older versions - Blue is stable */
-        .version-block:nth-child(2) .version-header {
-            background-color: #007bff;
-        }
-
-        .version-block:nth-child(2) .version-header:hover {
-            background-color: #0056b3; 
-        }
-        
-        /* Ensures the arrow is visible and separated from the text */
-        .toggle-arrow {
-            font-size: 1.2em;
-            margin-left: 15px; /* Adds space between text and arrow */
-        }
-        
-        /* Styling for the content that drops down */
+        /* DOWNLOAD LINKS CONTAINER */
         .download-links {
             border: 1px solid #dee2e6;
             border-top: none;
@@ -68,85 +138,123 @@
             background-color: #f8f9fa; 
         }
 
-        /* Style for the actual download buttons inside the links block */
-        .download-links .download-btn {
-            background-color: #ffc107;
-            color: #333;
-            padding: 10px 18px; /* Bigger button */
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            margin-right: 10px;
-            transition: background-color 0.2s;
+        /* ------------------------------------------- */
+        /* SHINE ANIMATION & BUTTONS */
+        /* ------------------------------------------- */
+        @keyframes color-shift-shine {
+            0% { background-color: #ffc107; box-shadow: 0 0 5px rgba(255, 193, 7, 0.5); }
+            33% { background-color: #17a2b8; box-shadow: 0 0 8px rgba(23, 162, 184, 0.7); }
+            66% { background-color: #dc3545; box-shadow: 0 0 5px rgba(220, 53, 69, 0.5); }
+            100% { background-color: #ffc107; box-shadow: 0 0 5px rgba(255, 193, 7, 0.5); }
         }
 
-        .download-links .download-btn:hover {
-            background-color: #e0a800; 
+        .download-links .download-btn {
+            color: #fff !important; 
+            padding: 12px 20px;
+            border-radius: 8px; 
+            font-size: 1.1em;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 10px;
+            animation: color-shift-shine 12s infinite ease-in-out; 
+        }
+
+        /* TV Specific Button Override */
+        .tv-download-btn {
+            background-color: #6f42c1 !important;
+            animation: none !important;
+            box-shadow: 0 4px 6px rgba(111, 66, 193, 0.3);
+            transition: transform 0.2s;
+        }
+        .tv-download-btn:hover {
+            transform: translateY(-2px);
+            background-color: #5a32a3 !important;
+        }
+
+        .download-links p {
+            color: #495057; 
+            font-weight: 600; 
+            text-shadow: 0 0 1px rgba(0, 0, 0, 0.05); 
+            display: inline-block; 
+            margin-left: 5px;
         }
 
         /* ------------------------------------------- */
-/* 1. Shine Animation Keyframes */
-/* ------------------------------------------- */
-@keyframes color-shift-shine {
-    0% { 
-        background-color: #ffc107; /* Yellow */
-        box-shadow: 0 0 5px rgba(255, 193, 7, 0.5); 
-    }
-    33% { 
-        background-color: #17a2b8; /* Cyan/Info */
-        box-shadow: 0 0 8px rgba(23, 162, 184, 0.7); 
-    }
-    66% { 
-        background-color: #dc3545; /* Red/Danger */
-        box-shadow: 0 0 5px rgba(220, 53, 69, 0.5); 
-    }
-    100% { 
-        background-color: #ffc107; /* Back to Yellow */
-        box-shadow: 0 0 5px rgba(255, 193, 7, 0.5); 
-    }
-}
+        /* PLATFORM SWITCHER STYLES */
+        /* ------------------------------------------- */
+        .platform-switcher {
+            display: flex;
+            justify-content: center;
+            margin: 25px 0 10px 0;
+            gap: 15px;
+        }
 
-/* ------------------------------------------- */
-/* 2. Apply Animation to Download Buttons */
-/* ------------------------------------------- */
-.download-links .download-btn {
-    /* Override existing styling */
-    color: #fff !important; /* Force white text for better contrast on changing backgrounds */
-    padding: 12px 20px;
-    border-radius: 8px; /* Slightly more prominent */
-    font-size: 1.1em;
-    font-weight: bold;
-    text-decoration: none;
-    display: inline-block;
-    margin-right: 10px;
-    
-    /* Animation Properties */
-    animation: color-shift-shine 12s infinite ease-in-out; /* Apply the shifting animation */
-    transition: none; /* Disable standard hover transition to let animation dominate */
-}
+        .platform-btn {
+            padding: 10px 25px;
+            border: 2px solid #ddd;
+            background-color: #f8f9fa;
+            color: #555;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
 
-.download-links .download-btn:hover {
-    /* Subtle pulsing effect on hover, still using the animation colors */
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
-}
+        .platform-btn:hover { transform: translateY(-2px); }
 
-/* ------------------------------------------- */
-/* 3. Style the Descriptive Text */
-/* ------------------------------------------- */
-.download-links p {
-    /* Makes the accompanying text slightly glow and stand out */
-    color: #495057; /* Dark gray text color */
-    font-weight: 600; /* Bolder text */
-    text-shadow: 0 0 1px rgba(0, 0, 0, 0.05); /* Subtle inner shadow/glow */
-    display: inline-block; /* Aligns text next to the button */
-    margin-left: 5px;
-}
+        .platform-btn.active.mobile {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+        }
+
+        .platform-btn.active.tv {
+            background-color: #6f42c1;
+            color: white;
+            border-color: #6f42c1;
+            box-shadow: 0 4px 10px rgba(111, 66, 193, 0.4);
+        }
+
+        /* MODAL */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 100; 
+            padding-top: 60px; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.9); 
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* FOOTER & MISC */
+        .how-download { display: block; margin: 20px 0; text-align: center; }
+        footer { text-align: center; padding: 20px; background-color: #333; color: white; margin-top: 30px;}
     </style>
     
 </head>
 <body>
-
 
 <header>
     <h1>DHR Store</h1>
@@ -167,221 +275,175 @@
     <a href="#">Top Charts</a>
     <a href="pri.html">Premium</a>
 </nav>
-<div id="resultsContainer"></div>
 
 <div class="app-details">
-    <img src="https://raw.githubusercontent.com/Zenda-Cross/vega-app/refs/heads/main/assets/bootsplash/logo%404x.png" alt="App Icon" class="app-icon" style="background-color: black; background-radius: 5px;">
+    <img src="https://raw.githubusercontent.com/Zenda-Cross/vega-app/refs/heads/main/assets/bootsplash/logo%404x.png" alt="App Icon" class="app-icon" style="background-color: black; border-radius: 5px;">
     <h2>Vega-Next</h2>
     <p>Category: Productivity</p>
     <p class="downloads">921+ downloads</p>
     
-<div class="rating">
-    <span id="user-rating">
-        ★ ★ ★ ★ ★
-    </span>
-    <p id="average-rating">5/5 (590 ratings)</p>
-</div>
-<input type="hidden" id="rating-value" value="0">
-<button id="submit-rating">Submit Rating</button>
-<div class="rating">
-    <span class="star" data-value="1">★</span>
-    <span class="star" data-value="2">★</span>
-    <span class="star" data-value="3">★</span>
-    <span class="star" data-value="4">★</span>
-    <span class="star" data-value="5">★</span>
-</div>
+    <div class="rating">
+        <span id="user-rating">★ ★ ★ ★ ★</span>
+        <p id="average-rating">5/5 (590 ratings)</p>
+    </div>
+    <input type="hidden" id="rating-value" value="0">
+    <button id="submit-rating" style="padding: 5px 10px; cursor:pointer;">Submit Rating</button>
+    <div class="rating">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+    </div>
     
     <h3>Overview</h3>
     <p class="description">
-        Through this app you can watch newly released movies, web series, Netflix, Amazon prime video for free and also download them for free. There is no ad in this app. The UI of this app is advanced.This app comes with a good feature but consumes less data<br>Watch according web season, episode and release date<br>Also download according to watching<br>Dynamic UI system make advance<br>5000+ live TV channel</p>
+        Through this app you can watch newly released movies, web series, Netflix, Amazon prime video for free and also download them for free. There is no ad in this app. The UI of this app is advanced.<br>
+        5000+ live TV channel
+    </p>
     
     <h3>Screenshots</h3>
     <div class="screenshots">
         <img src="vgimage/Screenshot_2025-01-21-14-16-23-85_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="Screenshot 1" class="screenshot">
         <img src="vgimage/Screenshot_2024-12-11-07-48-24-57_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="Screenshot 2" class="screenshot">
-        <img src="vgimage/Screenshot_2024-12-11-07-47-59-38_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="" class="screenshot">
-        <img src="vgimage/Screenshot_2024-12-11-07-51-52-60_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="" class="screenshot">
-        <img src="vgimage/Screenshot_2024-12-11-07-48-05-30_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="" class="screenshot">
-        <img src="vgimage/IMG_20250121_142011.jpg" alt="6" class="screenshot">
-        <img src="vgimage/IMG_20250121_142+019.jpg" alt="7" class="screenshot">
-        <img src="vgimage/IMG_20250121_142035.jpg" alt="8" class="screenshot">
-        <img src="vgimage/IMG_20250121_142044.jpg" alt="9" class="screenshot">
-        <img src="vgimage/IMG_20250121_142053.jpg" alt="10" class="screenshot">
-    </div>
-    <div class="version-block">
-        <h2 class="version-header">v3.4.4<span class="toggle-arrow">recommended👇</span></h2>
-        
-        <div class="download-links" style="display: none;">
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release4.5.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release4.5.apk?download=" class="download-btn">Download</a><p>for 7 android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release4.5.apk?download=" class="download-btn">Download</a><p>Universal for every Devices</p>
-        </div>
-    </div>
-    <div class="version-block">
-        <h2 class="version-header">v3.4.3<span class="toggle-arrow">👇</span></h2>
-        
-        <div class="download-links" style="display: none;">
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release4.4.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release4.4.apk?download=" class="download-btn">Download</a><p>for 7 android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release4.4.apk?download=" class="download-btn">Download</a><p>Universal for every Devices</p>
-        </div>
-    </div>
-     <div class="version-block">
-        <h2 class="version-header">v3.4.2<span class="toggle-arrow">👇</span></h2>
-        
-        <div class="download-links" style="display: none;">
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release4.3.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release4.3.apk?download=" class="download-btn">Download</a><p>for 7 android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release4.3.apk?download=" class="download-btn">Download</a><p>Universal for every Devices</p>
-        </div>
-    </div>
-    <div class="version-block">
-        <h2 class="version-header">v3.4.1<span class="toggle-arrow">👇</span></h2>
-        
-        <div class="download-links" style="display: none;">
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release4.2.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release4.2.apk?download=" class="download-btn">Download</a><p>for 7 android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release4.2.apk?download=" class="download-btn">Download</a><p>Universal for every Devices</p>
-        </div>
-    </div>
-    <div class="version-block">
-        <h2 class="version-header">v3.4.01<span class="toggle-arrow">👇</span></h2>
-        
-        <div class="download-links" style="display: none;">
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release4.1.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release4.1.apk?download=" class="download-btn">Download</a><p>for 7 android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release4.1.apk?download=" class="download-btn">Download</a><p>Universal for every Devices</p>
-        </div>
-    </div>
-    <div class="version-block">
-        <h2 class="version-header">v3.4.0<span class="toggle-arrow">👇</span></h2>
-        
-        <div class="download-links" style="display: none;">
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release4.0.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release4.0.apk?download=" class="download-btn">Download</a><p>for 7 android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release4.0.apk?download=" class="download-btn">Download</a><p>Universal for every Devices</p>
-        </div>
-    </div>
-     <div class="version-block">
-        <h2 class="version-header">v3.3.9 <span class="toggle-arrow">👇</span></h2>
-        
-        <div class="download-links" style="display: none;">
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release9.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release9.apk?download=" class="download-btn">Download</a><p>for 7 android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release9.apk?download=" class="download-btn">Download</a><p>Universal for every Devices</p>
-        </div>
-    </div>
-    <div class="version-block">
-        <h2 class="version-header">v3.3.8 <span class="toggle-arrow">👇</span></h2>
-        
-        <div class="download-links" style="display: none;">
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release8.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release8.apk?download=" class="download-btn">Download</a><p>for 7 android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release8.apk?download=" class="download-btn">Download</a><p>Universal for every Devices</p>
-        </div>
-    </div>
-    <div class="version-block">
-        <h2 class="version-header">v3.3.7 <span class="toggle-arrow">👇</span></h2>
-        
-        <div class="download-links" style="display: none;">
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release7.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release7.apk?download=" class="download-btn">Download</a><p>for 7 android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release7.apk?download=" class="download-btn">Download</a><p>Universal for every Devices</p>
-        </div>
-    </div>
-    <div class="version-block">
-        <h2 class="version-header">v3.3.6 <span class="toggle-arrow">👇</span></h2>
-        
-        <div class="download-links" style="display: none;">
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release6.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release6.apk?download=" class="download-btn">Download</a><p>for 7 android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release6.apk?download=" class="download-btn">Download</a><p>Universal for every Devices</p>
-        </div>
-    </div>
-    <div class="version-block">
-        <h2 class="version-header">v3.3.5 <span class="toggle-arrow">👇</span></h2>
-        
-        <div class="download-links" style="display: none;">
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release5.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release5.apk?download=" class="download-btn">Download</a><p>for 7 android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release5.apk?download=" class="download-btn">Download</a><p>Universal for every Devices</p>
-        </div>
+        <img src="vgimage/Screenshot_2024-12-11-07-47-59-38_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="3" class="screenshot">
+        <img src="vgimage/Screenshot_2024-12-11-07-51-52-60_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="4" class="screenshot">
     </div>
 
-    <div class="version-block">
-        <h2 class="version-header">v3.3.4 <span class="toggle-arrow">👇</span></h2>
-        
-        <div class="download-links" style="display: none;">
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release4.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release4.apk?download=" class="download-btn">Download</a><p>for 7 android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release4.apk?download=" class="download-btn">Download</a><p>Universal for every Devices</p>
-        </div>
+    <div class="platform-switcher">
+        <button class="platform-btn active mobile" onclick="switchPlatform('mobile')">📱 Mobile Version</button>
+        <button class="platform-btn tv" onclick="switchPlatform('tv')">📺 TV Version</button>
     </div>
     
-    <div class="version-block">
-        <h2 class="version-header">v3.3.3 <span class="toggle-arrow">👇</span></h2>
-        
-        <div class="download-links" style="display: none;">
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release.apk?download=" class="download-btn">Download</a><p>for 7 android version</p>
-            <br>
-            
-            <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release.apk?download=" class="download-btn">Download</a><p>Universal for every Devices</p>
+    <div id="mobile-versions">
+        <div class="version-block">
+            <h2 class="version-header">v3.4.4<span class="toggle-arrow">recommended👇</span></h2>
+            <div class="download-links" style="display: none;">
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release4.5.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release4.5.apk?download=" class="download-btn">Download</a><p>for 7 android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release4.5.apk?download=" class="download-btn">Download</a><p>Universal</p>
+            </div>
         </div>
-    </div>
-    
-    <a href="how.html" class="how-download">how to download</a>
-    <a href="https://vegaapp.vercel.app/" class="download-btn">Try Vega</a>
+
+        <div class="version-block">
+            <h2 class="version-header">v3.4.3<span class="toggle-arrow">👇</span></h2>
+            <div class="download-links" style="display: none;">
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release4.4.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release4.4.apk?download=" class="download-btn">Download</a><p>for 7 android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release4.4.apk?download=" class="download-btn">Download</a><p>Universal</p>
+            </div>
+        </div>
+
+        <div class="version-block">
+            <h2 class="version-header">v3.4.2<span class="toggle-arrow">👇</span></h2>
+            <div class="download-links" style="display: none;">
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release4.3.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release4.3.apk?download=" class="download-btn">Download</a><p>for 7 android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release4.3.apk?download=" class="download-btn">Download</a><p>Universal</p>
+            </div>
+        </div>
+
+        <div class="version-block">
+            <h2 class="version-header">v3.4.1<span class="toggle-arrow">👇</span></h2>
+            <div class="download-links" style="display: none;">
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release4.2.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release4.2.apk?download=" class="download-btn">Download</a><p>for 7 android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release4.2.apk?download=" class="download-btn">Download</a><p>Universal</p>
+            </div>
+        </div>
+
+        <div class="version-block">
+            <h2 class="version-header">v3.4.01<span class="toggle-arrow">👇</span></h2>
+            <div class="download-links" style="display: none;">
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release4.1.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release4.1.apk?download=" class="download-btn">Download</a><p>for 7 android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release4.1.apk?download=" class="download-btn">Download</a><p>Universal</p>
+            </div>
+        </div>
+
+        <div class="version-block">
+            <h2 class="version-header">v3.4.0<span class="toggle-arrow">👇</span></h2>
+            <div class="download-links" style="display: none;">
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release4.0.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release4.0.apk?download=" class="download-btn">Download</a><p>for 7 android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release4.0.apk?download=" class="download-btn">Download</a><p>Universal</p>
+            </div>
+        </div>
+
+        <div class="version-block">
+            <h2 class="version-header">v3.3.9<span class="toggle-arrow">👇</span></h2>
+            <div class="download-links" style="display: none;">
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release9.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release9.apk?download=" class="download-btn">Download</a><p>for 7 android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release9.apk?download=" class="download-btn">Download</a><p>Universal</p>
+            </div>
+        </div>
+        
+        <div class="version-block">
+            <h2 class="version-header">v3.3.8<span class="toggle-arrow">👇</span></h2>
+            <div class="download-links" style="display: none;">
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release8.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release8.apk?download=" class="download-btn">Download</a><p>for 7 android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release8.apk?download=" class="download-btn">Download</a><p>Universal</p>
+            </div>
+        </div>
+
+        <div class="version-block">
+            <h2 class="version-header">v3.3.7<span class="toggle-arrow">👇</span></h2>
+            <div class="download-links" style="display: none;">
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release7.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release7.apk?download=" class="download-btn">Download</a><p>for 7 android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release7.apk?download=" class="download-btn">Download</a><p>Universal</p>
+            </div>
+        </div>
+
+        <div class="version-block">
+            <h2 class="version-header">v3.3.6<span class="toggle-arrow">👇</span></h2>
+            <div class="download-links" style="display: none;">
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release6.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release6.apk?download=" class="download-btn">Download</a><p>for 7 android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release6.apk?download=" class="download-btn">Download</a><p>Universal</p>
+            </div>
+        </div>
+
+        <div class="version-block">
+            <h2 class="version-header">v3.3.5<span class="toggle-arrow">👇</span></h2>
+            <div class="download-links" style="display: none;">
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release5.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release5.apk?download=" class="download-btn">Download</a><p>for 7 android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release5.apk?download=" class="download-btn">Download</a><p>Universal</p>
+            </div>
+        </div>
+
+        <div class="version-block">
+            <h2 class="version-header">v3.3.4<span class="toggle-arrow">👇</span></h2>
+            <div class="download-links" style="display: none;">
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release4.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release4.apk?download=" class="download-btn">Download</a><p>for 7 android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release4.apk?download=" class="download-btn">Download</a><p>Universal</p>
+            </div>
+        </div>
+
+        <div class="version-block">
+            <h2 class="version-header">v3.3.3<span class="toggle-arrow">👇</span></h2>
+            <div class="download-links" style="display: none;">
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release.apk?download=" class="download-btn">Download</a><p>for Modern 8+ android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release.apk?download=" class="download-btn">Download</a><p>for 7 android</p><br>
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release.apk?download=" class="download-btn">Download</a><p>Universal</p>
+            </div>
+        </div>
+    </div> <div id="tv-versions" style="display: none;">
+        
+        <div class="version-block">
+            <h2 class="version-header">v0.0.1 TV<span class="toggle-arrow">latest tv👇</span></h2>
+            <div class="download-links" style="display: none;">
+                <h4 style="margin:0 0 10px 0; color:#6f42c1;">Optimized for Android TV:</h4>
+                <a href="app/Vega-Next_TV-v0.0.1.apk" class="download-btn tv-download-btn">Download APK</a><p>Firestick / Android TV</p>
+            </div>
+        </div>
+
+    </div> <a href="how.html" class="how-download">how to download</a>
+    <a href="https://vegaapp.vercel.app/" class="download-btn" style="display:block; width: fit-content; margin: 20px auto; background-color: #333; color: white; padding: 15px 30px; border-radius: 5px; text-decoration: none;">Try Vega</a>
 </div>
     
 <div id="imageModal" class="modal">
@@ -390,44 +452,75 @@
 </div>
 
 <script>
-    // This function will handle the click for ANY version header
+    // ----------------------------------------------------
+    // PLATFORM TOGGLE LOGIC (MOBILE VS TV)
+    // ----------------------------------------------------
+    function switchPlatform(platform) {
+        // 1. Update Buttons Visual State
+        const mobileBtns = document.querySelectorAll('.platform-btn.mobile');
+        const tvBtns = document.querySelectorAll('.platform-btn.tv');
+
+        // 2. Get the containers
+        const mobileContainer = document.getElementById('mobile-versions');
+        const tvContainer = document.getElementById('tv-versions');
+
+        if (platform === 'mobile') {
+            // Activate Mobile Button
+            mobileBtns.forEach(btn => btn.classList.add('active'));
+            tvBtns.forEach(btn => btn.classList.remove('active'));
+
+            // Show Mobile Container, Hide TV Container
+            mobileContainer.style.display = 'block';
+            tvContainer.style.display = 'none';
+
+        } else {
+            // Activate TV Button
+            tvBtns.forEach(btn => btn.classList.add('active'));
+            mobileBtns.forEach(btn => btn.classList.remove('active'));
+
+            // Show TV Container, Hide Mobile Container
+            tvContainer.style.display = 'block';
+            mobileContainer.style.display = 'none';
+        }
+    }
+
+    // ----------------------------------------------------
+    // VERSION HEADER TOGGLE LOGIC
+    // ----------------------------------------------------
     function toggleDownloads(event) {
         const header = event.currentTarget;
         const downloadsDiv = header.nextElementSibling;
-        
-        // Find the arrow element inside the header
         const arrow = header.querySelector('.toggle-arrow');
 
         if (downloadsDiv && downloadsDiv.classList.contains('download-links')) {
             if (downloadsDiv.style.display === 'none' || downloadsDiv.style.display === '') {
-                // Show the downloads and change the arrow
                 downloadsDiv.style.display = 'block'; 
-                if (arrow) arrow.textContent = '👆'; // Change to up arrow
+                if (arrow) arrow.textContent = '👆'; 
             } else {
-                // Hide the downloads and change the arrow back
                 downloadsDiv.style.display = 'none';
-                if (arrow) arrow.textContent = '👇'; // Change to down arrow
+                if (arrow) arrow.textContent = '👇'; 
             }
         }
     }
 
-    // Existing search function (placeholder)
+    // ----------------------------------------------------
+    // SEARCH PLACEHOLDER
+    // ----------------------------------------------------
     function searchApps() {
-        // Implement your app search logic here if necessary
         console.log("Searching for apps...");
     }
 
-    // Attach all event listeners after the DOM is loaded
+    // ----------------------------------------------------
+    // INITIALIZATION ON LOAD
+    // ----------------------------------------------------
     document.addEventListener('DOMContentLoaded', () => {
-        // 1. Version Toggle Logic: Selects ALL elements with the class 'version-header'
+        // 1. Attach Version Toggles
         const versionHeaders = document.querySelectorAll('.version-header');
-        
         versionHeaders.forEach(header => {
-            // Attach the listener
             header.addEventListener('click', toggleDownloads);
         });
         
-        // 2. Screenshot Modal functionality
+        // 2. Screenshot Modal
         const screenshots = document.querySelectorAll('.screenshot');
         const modal = document.getElementById('imageModal');
         const modalImage = document.getElementById('modalImage');
@@ -446,13 +539,13 @@
             });
         }
         
-        // 3. Rating logic
+        // 3. Rating Logic
         const stars = document.querySelectorAll('.rating .star');
         stars.forEach(star => {
             star.addEventListener('click', function() {
                 const value = this.getAttribute('data-value');
                 document.getElementById('rating-value').value = value;
-                // Add visual feedback (e.g., coloring the stars)
+                alert('Rated ' + value + ' stars');
             });
         });
     });
