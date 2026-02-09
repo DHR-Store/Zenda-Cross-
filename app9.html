@@ -1,112 +1,218 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DHR Store</title>
-    <link rel="stylesheet" href="style.css">
-   
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your AI Assistant</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      width: 100%;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .bg {
+      background: url('https://skibi-di.com/ai_person_expand.png') no-repeat center center;
+      background-size: cover;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      z-index: -1;
+      filter: brightness(1); /* tweak for darkness/lightness */
+    }
+
+    .content {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 2rem 4rem;
+      color: white;
+      text-align: left;
+    }
+
+
+    .text-box {
+      max-width: 600px;
+      background-color: rgba(0, 0, 0, 0.6); /* Optional for contrast */
+      padding: 2rem;
+      border-radius: 12px;
+    }
+
+    .text-box h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .text-box p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #ddd;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .buttons a {
+      padding: 0.8rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .buttons a.primary {
+      background-color: #fff;
+      color: #000;
+    }
+
+    .buttons a.secondary {
+      border: 1px solid #fff;
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .text-box h1 {
+        font-size: 2rem;
+      }
+
+      .text-box p {
+        font-size: 1rem;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .buttons a {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
-<header>
-    <h1>DHR Store</h1>
-</header>
+  <div class="bg"></div>
 
-<!-- Floating Search Bar -->
-<div class="search-icon">
-  <a href="index.html">
-    <img src="https://purepng.com/public/uploads/large/search-icon-lob.png" alt="Search Icon"></a>
-</div>
-<!-- Hidden search bar that will appear when the search icon is clicked -->
-<div class="search-container" id="searchContainer">
-    <input type="text" id="searchInput" placeholder="Search for apps..." onkeyup="searchApps()">
-</div>
-
-<nav>
-    <a href="index.html">Home</a>
-    <a href="pri.html">Categories</a>
-    <a href="pri.html">Top Charts</a>
-    <a href="pri.html">Premium</a>
-</nav>
-<div id="resultsContainer"></div>
-
-<div class="app-details">
-    <img src="aniTeamsimg/IMG_20250121_193031.jpg" alt="App Icon" class="app-icon" style="background-color: black; background-radius: 5px;">
-    <h2>aniTeams</h2>
-     <p>Category: Entertainment</p>
-    <p class="downloads">12+ downloads</p>
-    
-<!-- Rating -->
-<div class="rating">
-    <span id="user-rating">
-        ★ ★ ★ ★ ★
-    </span>
-    <p id="average-rating">5/5 (8 ratings)</p>
-</div>
-<input type="hidden" id="rating-value" value="0">
-<button id="submit-rating">Submit Rating</button>
-<div class="rating">
-    <span class="star" data-value="1">★</span>
-    <span class="star" data-value="2">★</span>
-    <span class="star" data-value="3">★</span>
-    <span class="star" data-value="4">★</span>
-    <span class="star" data-value="5">★</span>
-</div>
-    
-    <!-- Overview -->
-    <h3>Overview</h3>
-    <p class="description">
-       • Watch All type Anime
-        <br>
-•Multiple Languages 
-<br>
-•Multiple subtitles 
-•Multiple sources 
-<br>
-•Dynamic UI
-<br>
-•All gestures Controller 
-<br>
-•Full Episode and Full upcoming season 
-<br>
-•Video quality multiple type 4k , 1080pHD, advanced medium,low 
-<br>
-•Low data Consumption 
-<br>
-•Download all type with Dubbed Audio 
-<br>
-•Sever Cruchyroll, Hianime,gogo, Rido, etc.
-    
-    <h3>Screenshots</h3>
-    <div class="screenshots">
-        <img src="aniTeamsimg/Screenshot_2025-01-21-19-36-24-48_8042436a9dde4b8750fc6419ac39f9e6.jpg" alt="Screenshot 1" class="screenshot">
-        <img src="aniTeamsimg/Screenshot_2025-01-21-20-04-04-36_8042436a9dde4b8750fc6419ac39f9e6.jpg" alt="Screenshot 2" class="screenshot">
-        <img src="aniTeamsimg/Screenshot_2025-01-21-19-36-29-88_8042436a9dde4b8750fc6419ac39f9e6.jpg" alt="Screenshot 3" class="screenshot">
-        <img src="aniTeamsimg/Screenshot_2025-01-21-19-36-54-24_8042436a9dde4b8750fc6419ac39f9e6.jpg" alt="screenshot5" class="screenshot" >
-        <img src="aniTeamsimg/Screenshot_2025-01-21-19-41-05-57_8042436a9dde4b8750fc6419ac39f9e6.jpg" alt="" class="screenshot">
-        <img src="aniTeamsimg/Screenshot_2025-01-21-19-41-16-06_8042436a9dde4b8750fc6419ac39f9e6.jpg" alt="" class="screenshot">
-        <img src="aniTeamsimg/Screenshot_2025-01-21-19-41-54-93_8042436a9dde4b8750fc6419ac39f9e6.jpg" alt="" class="screenshot">
-        <img src="animeTVimg/IMG_20250121_130814.jpg" alt="" class="screenshot">
-        
+  <div class="content">
+    <div class="text-box">
+      <h1>Your AI. <br />Your Rules.</h1>
+      <p>Create your own AI assistant — fully customizable, built to serve your needs, and share it with others.</p>
+      <div class="buttons">
+        <a href="https://play.google.com/store/apps/details?id=com.live2d.demo&pcampaignid=web_share" class="primary">Download on Android</a>
+        <a href="#about" class="secondary">Learn More</a>
+      </div>
     </div>
+  </div>
 
-    <a href="Appdata/app-release.apk" class="download-btn">Download</a>
-    <br>
-    <a href="how.html" class="how-download">How to Download </a>
-</div>
+  <section id="about"> 
+  <div class="container"> 
+        <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>About NeuroVie</title>
+      <style>
+        body {
+          background-color: #0a0a0a;
+          color: white;
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+        }
+        .container {
+          max-width: 1000px;
+          margin: auto;
+          padding: 2rem;
+          text-align: center;
+        }
+        h1 {
+          font-size: 2.5rem;
+          margin-bottom: 1rem;
+          color: #00bfff;
+        }
+        .hero-image {
+          position: relative;
+          display: inline-block;
+        }
+        .hero-image img {
+          width: 100%;
+          border-radius: 10px;
+        }
+        h2 {
+          margin-top: 3rem;
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: #00bfff;
+        }
+        p.purpose {
+          font-size: 1.2rem;
+          margin-bottom: 2rem;
+          color: #ddd;
+        }
+        .grid {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          margin-top: 2rem;
+        }
+        .card {
+          width: 45%;
+          margin-bottom: 2rem;
+          background-color: #1a1a1a;
+          padding: 1rem;
+          border-radius: 10px;
+          text-align: left;
+        }
+        .card h3 {
+          color: #00bfff;
+          font-size: 1.2rem;
+          margin-bottom: 0.5rem;
+        }
+        .card p {
+          color: #aaa;
+          font-size: 0.95rem;
+        }
+        @media (max-width: 768px) {
+          .card {
+            width: 100%;
+          }
+        }
+        .styled-iframe {
+          width: 100%;
+          height: 500px;
+          border: none; /* removes border */
+          border-radius: 12px; /* rounds corners */
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* adds shadow */
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>About NeuroVie</h1>
 
-<!-- Modal for Enlarged Image -->
-<div id="imageModal" class="modal">
-    <span class="close" id="modalClose">&times;</span>
-    <img class="modal-content" id="modalImage">
-</div>
+        <p class="purpose">
+          NeuroVie is redefining digital AI assistants that help users stay organized, and automate everyday tasks with ease. With NeuroVie, you have total control — from customizing the assistant’s behavior and appearance to using it seamlessly across all your devices.
+        </p>
 
+      </div>
+    </body>
+    </html>
 
-<script src="main.js"></script>
-
-
-<footer>
-    <p>&copy; 2024 DHR Store. All rights reserved.</p>
-</footer>
+  </div>
+</section>
 </body>
 </html>
