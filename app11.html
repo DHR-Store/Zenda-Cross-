@@ -1,28 +1,24 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RiMusic - DHR Store</title>
+    <title>VCall AI - DHR Store</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 
 <header>
     <h1>DHR Store</h1>
 </header>
 
-<!-- Floating Search Bar -->
-<!-- Floating search icon -->
+<!-- Floating Search Icon -->
 <div class="search-icon" onclick="toggleSearchBar()">
     <img src="https://purepng.com/public/uploads/large/search-icon-lob.png" alt="Search Icon">
 </div>
 
-<!-- Hidden search bar that will appear when the search icon is clicked -->
 <div class="search-container" id="searchContainer">
-    <input type="text" id="searchInput" placeholder="Search for apps..." onkeyup="searchApps()">
+    <input type="text" id="searchInput" placeholder="Search apps..." onkeyup="searchApps()">
 </div>
 
 <nav>
@@ -31,61 +27,74 @@
     <a href="#">Top Charts</a>
     <a href="#">Premium</a>
 </nav>
-<div id="resultsContainer"></div>
 
 <div class="app-details">
-    <img src="Kr/IMG_20250614_104303.jpg" alt="App Icon" class="app-icon" style="background-color: black; background-radius: 5px;">
-    <h2>Kreate</h2>
-     <p>Category: Productivity</p>
-    <p class="downloads">789+ downloads</p>
-    
-<!-- Rating -->
-<div class="rating">
-    <span id="user-rating">
-        ★ ★ ★ ★ 
-    </span>
-    <p id="average-rating">5/5 (560 ratings)</p>
-</div>
-<input type="hidden" id="rating-value" value="0">
-<button id="submit-rating">Submit Rating</button>
-<div class="rating">
-    <span class="star" data-value="1">★</span>
-    <span class="star" data-value="2">★</span>
-    <span class="star" data-value="3">★</span>
-    <span class="star" data-value="4">★</span>
-    <span class="star" data-value="5">★</span>
-</div>
-    
+
+    <img src="Kr/vcall_ai_icon.png" alt="VCall AI Icon" class="app-icon" style="background:black;border-radius:10px;">
+
+    <h2>VCall AI</h2>
+    <p>Category: AI · Device Control · Productivity</p>
+    <p class="downloads">0+ downloads</p>
+
+    <!-- Rating -->
+    <div class="rating">
+        <span>★ ★ ★ ★ ★</span>
+        <p>5/5 (0 ratings)</p>
+    </div>
+
     <!-- Overview -->
     <h3>Overview</h3>
     <p class="description">
-       Listening music through without ad Spotify<br>jio saavn<br> ytmusic<br> Music Download no app and play offline<br>also play on device music your personal downloaded music<br> simple search system<br>music search using video link and Download<br>Dynamic UI system make advance player MP3 And also watch video only for song video provide by youtube</p>
-    
+        <b>VCall AI</b> ek powerful AI based control system hai jisse aap  
+        <br><br>
+        ✅ Android Phone control kar sakte ho  
+        <br>
+        ✅ Desktop / Laptop (Windows) control kar sakte ho  
+        <br>
+        ✅ Voice + Command based automation  
+        <br>
+        ✅ App open, system control, files & tools handle  
+        <br>
+        ✅ Same AI, multiple devices  
+        <br><br>
+        Ek hi AI – Phone aur Computer dono ka boss 😏
+    </p>
+
+    <!-- Screenshots -->
     <h3>Screenshots</h3>
     <div class="screenshots">
-     
-        <img src="https://raw.githubusercontent.com/fast4x/RiMusic/refs/heads/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg" alt="Screenshot 1">
-        <img src="https://raw.githubusercontent.com/fast4x/RiMusic/master/fastlane/metadata/android/en-US/images/phoneScreenshots/2.jpg" alt="Screenshot 2">
-        <img src="https://raw.githubusercontent.com/fast4x/RiMusic/master/fastlane/metadata/android/en-US/images/phoneScreenshots/4.jpg" alt="">
-        <img src="https://raw.githubusercontent.com/fast4x/RiMusic/master/fastlane/metadata/android/en-US/images/phoneScreenshots/5.jpg" alt="">
-        <img src="/Rimage/Screenshot_2024-12-11-03-23-26-44_91b67804b5fb3353a77fb824d6bb0b50.jpg" alt="">
-        <img src="/Rimage/Screenshot_2024-12-11-03-22-45-99_91b67804b5fb3353a77fb824d6bb0b50.jpg" alt="">
-        <img src="/Rimage/Screenshot_2024-12-11-03-22-55-52_91b67804b5fb3353a77fb824d6bb0b50.jpg" alt="">
-        <img src="/Rimage/Screenshot_2024-12-11-03-23-55-62_91b67804b5fb3353a77fb824d6bb0b50.jpg" alt="">
-        <img src="/Rimage/Screenshot_2024-12-11-03-29-22-47_91b67804b5fb3353a77fb824d6bb0b50.jpg" alt="">
-        <img src="/Rimage/Screenshot_2024-12-11-03-24-25-33_91b67804b5fb3353a77fb824d6bb0b50.jpg" alt="">
-        
+        <img src="Vcall/ss1.jpg">
+        <img src="Vcall/ss2.jpg">
+        <img src="Vcall/ss3.jpg">
+        <img src="Vcall/ss4.jpg">
     </div>
-    <!-- Modal for Enlarged Image -->
-<div id="imageModal" class="modal">
-    <span class="close" id="modalClose">&times;</span>
-    <img class="modal-content" id="modalImage">
+
+    <!-- Version -->
+    <p><b>Version:</b> v1.0.0</p>
+
+    <!-- Download Section -->
+    <h3>Download Options</h3>
+
+    <div style="display:flex;gap:15px;flex-wrap:wrap;">
+
+        <!-- Android APK -->
+        <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Appdata/app-release (1).apk?download=" class="download-btn">
+            📱 Download Android APK
+        </a>
+
+        <!-- Desktop EXE -->
+        <a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Appdata/AI_Boss_Server.exe?download=" class="download-btn">
+            💻 Download Desktop (Windows EXE)
+        </a>
+
+    </div>
+
+    <p style="margin-top:10px;font-size:14px;color:gray;">
+        ⚠ Both Android & Desktop versions are required for full control experience
+    </p>
+
 </div>
 
-    <p>v1.7.6</p>
-
-    <a href="https://kreate-that.vercel.app/Apk/Kreate-release.apk" class="download-btn">Download</a>
-</div>
 <script src="main.js"></script>
 
 <footer>
