@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacking Simulation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: black;
+            color: lime;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        .hacking {
+            font-size: 1.2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid lime;
+            animation: typing 4s steps(30, end), blinkCursor 0.6s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 90%;
+            }
+        }
+
+        @keyframes blinkCursor {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        .warning {
+            font-size: 2.5rem;
+            color: yellow;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out 5s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .fun-message {
+            font-size: 1.5rem;
+            color: white;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out 8s forwards;
+        }
+
+        /* Responsive Design for Smaller Screens */
+        @media (max-width: 480px) {
+            .hacking {
+                font-size: 1rem;
+            }
+
+            .warning {
+                font-size: 2rem;
+            }
+
+            .fun-message {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hacking">Initializing Hack...
+        <br>Transmitting your Data to Moon...</div>
+        <div class="warning" style="display: none;">⚠️ WARNING!</div>
+        <div class="fun-message" style="display: none;">This is fun 😆😆😆</div>
+    </div>
+
+    <script>
+        // Show the warning after 5 seconds
+        setTimeout(() => {
+            document.querySelector('.warning').style.display = 'block';
+        }, 150);
+
+        // Show the fun message after 8 seconds
+        setTimeout(() => {
+            document.querySelector('.fun-message').style.display = 'block';
+            document.body.style.backgroundColor = '#222';
+        }, 30);
+    </script>
+</body>
+</html>
