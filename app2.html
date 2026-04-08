@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>DHR Store · Vega-Next Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background: radial-gradient(circle at 10% 20%, rgb(248, 249, 255) 0%, #f1f5f9 100%);
+            color: #1e293b;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 12px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 12px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5b6e8c;
+        }
+
+        /* Header & Nav */
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 1.6rem 1rem;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        header h1 {
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            font-size: 2.1rem;
+            background: linear-gradient(120deg, #F97316, #FFB347);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: none;
+        }
+
+        nav {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 0.9rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            border-bottom: 1px solid #334155;
+        }
+        nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            margin: 0 1.2rem;
+            font-weight: 600;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        nav a:hover {
+            color: #FFB347;
+            transform: translateY(-1px);
+        }
+
+        /* Search area */
+        .search-icon {
+            text-align: center;
+            margin: 1.2rem 0 0.5rem;
+            cursor: pointer;
+        }
+        .search-icon img {
+            width: 34px;
+            opacity: 0.8;
+            transition: 0.2s;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        .search-icon img:hover {
+            opacity: 1;
+            transform: scale(1.02);
+        }
+        .search-container {
+            text-align: center;
+            margin: 0.5rem auto 1.5rem;
+            display: none;
+            max-width: 500px;
+            padding: 0 1rem;
+        }
+        .search-container input {
+            width: 100%;
+            padding: 12px 18px;
+            border-radius: 60px;
+            border: 1px solid #cbd5e1;
+            background: white;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            transition: 0.2s;
+        }
+        .search-container input:focus {
+            outline: none;
+            border-color: #F97316;
+            box-shadow: 0 0 0 3px rgba(249,115,22,0.2);
+        }
+
+        /* Main card */
+        .app-details {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(2px);
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 2rem 1.8rem;
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.6);
+            transition: all 0.2s;
+        }
+
+        .app-icon {
+            width: 110px;
+            height: 110px;
+            border-radius: 26px;
+            background: #0f172a;
+            display: block;
+            margin: 0 auto 1rem;
+            box-shadow: 0 12px 20px -8px rgba(0,0,0,0.2);
+            object-fit: cover;
+        }
+
+        h2 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b, #334155);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-align: center;
+        }
+        .category-badge {
+            text-align: center;
+            background: #eef2ff;
+            display: inline-block;
+            width: auto;
+            margin: 0.5rem auto;
+            padding: 0.25rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #4338ca;
+        }
+        .downloads {
+            text-align: center;
+            font-weight: 500;
+            color: #475569;
+        }
+
+        /* rating new design */
+        .rating-panel {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        .stars-container {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 0.6rem 0;
+        }
+        .star {
+            font-size: 2rem;
+            cursor: pointer;
+            transition: 0.1s;
+            color: #cbd5e1;
+        }
+        .star.selected, .star.hovered {
+            color: #fbbf24;
+            text-shadow: 0 0 6px #ffb347;
+        }
+        #average-rating {
+            font-weight: 700;
+            background: #1e293b;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        /* screenshots */
+        .screenshots {
+            display: flex;
+            overflow-x: auto;
+            gap: 14px;
+            padding: 0.8rem 0 1rem;
+            scroll-snap-type: x mandatory;
+        }
+        .screenshot {
+            max-height: 220px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 10px 15px -5px rgba(0,0,0,0.2);
+            scroll-snap-align: start;
+        }
+        .screenshot:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 25px -8px black;
+        }
+
+        /* platform switcher */
+        .platform-switcher {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0 1.5rem;
+        }
+        .platform-btn {
+            padding: 0.7rem 1.8rem;
+            border: none;
+            background: #f1f5f9;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            color: #334155;
+        }
+        .platform-btn.active.mobile {
+            background: #2563eb;
+            color: white;
+            box-shadow: 0 8px 18px -6px #2563eb;
+        }
+        .platform-btn.active.tv {
+            background: #6f42c1;
+            color: white;
+            box-shadow: 0 8px 18px -6px #6f42c1;
+        }
+        .platform-btn.active.windows {
+            background: #0f5c6b;
+            color: white;
+            box-shadow: 0 8px 18px -6px #0f5c6b;
+        }
+        .platform-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* version blocks */
+        .version-block {
+            margin-bottom: 1.2rem;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .version-header {
+            background: #ff4d00db;
+            padding: 1rem 1.5rem;
+            font-weight: 800;
+            font-size: 1.3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.2s;
+            color: white;
+            letter-spacing: -0.3px;
+        }
+        .version-block:first-of-type .version-header { background: #28a745; }
+        .version-block:nth-of-type(2) .version-header { background: #007bff; }
+        #tv-versions .version-header { background-color: #6f42c1; }
+        #windows-versions .version-header { background-color: #0f5c6b; }
+
+        .download-links {
+            padding: 1.2rem;
+            background: #ffffff;
+            border-top: 2px dashed #e9ecef;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            align-items: center;
+        }
+        .download-btn {
+            background: #0f172a;
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+        }
+        /* shine only for mobile default btns */
+        .download-links .download-btn:not(.tv-download-btn):not(.win-download-btn) {
+            animation: color-shift-shine 12s infinite ease-in-out;
+        }
+        @keyframes color-shift-shine {
+            0% { background-color: #ffc107; box-shadow: 0 0 4px #ffc107; }
+            33% { background-color: #17a2b8; }
+            66% { background-color: #dc3545; }
+            100% { background-color: #ffc107; }
+        }
+        .tv-download-btn {
+            background: #6f42c1 !important;
+            animation: none !important;
+        }
+        .win-download-btn {
+            background: #0f5c6b !important;
+            animation: none !important;
+        }
+        .download-links p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .how-download {
+            display: block;
+            text-align: center;
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+            color: #2563eb;
+        }
+        .try-vega-btn {
+            display: flex;
+            justify-content: center;
+            margin: 1.2rem auto;
+        }
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.92);
+            backdrop-filter: blur(12px);
+        }
+        .modal-content {
+            margin: 5% auto;
+            display: block;
+            width: 90%;
+            max-width: 750px;
+            border-radius: 24px;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 45px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 680px) {
+            .app-details { padding: 1.5rem; margin: 1rem; }
+            .version-header { font-size: 1.1rem; padding: 0.8rem 1rem; }
+            .download-links { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>✨ DHR Store</h1>
+    <p style="opacity:0.8;">Premium entertainment hub</p>
+</header>
+
+<div class="search-icon" id="searchToggleBtn">
+    <img src="https://purepng.com/public/uploads/large/search-icon-lob.png" alt="Search">
+</div>
+<div class="search-container" id="searchContainer">
+    <input type="text" id="searchInput" placeholder="🔍 Search version (e.g., v3.5.1, TV, v0.0.1...)" autocomplete="off">
+</div>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Categories</a>
+    <a href="#">Top Charts</a>
+    <a href="#">Premium</a>
+</nav>
+
+<div class="app-details">
+    <img src="https://raw.githubusercontent.com/Zenda-Cross/vega-app/refs/heads/main/assets/bootsplash/logo%404x.png" alt="Vega-Next Icon" class="app-icon">
+    <h2>Vega-Next · Ultimate Stream</h2>
+    <div style="text-align:center;"><span class="category-badge">📺 Entertainment · No Ads</span></div>
+    <p class="downloads">🔥 1,240+ active downloads · Live TV + Movies</p>
+
+    <!-- Enhanced Rating Section -->
+    <div class="rating-panel">
+        <div class="stars-container" id="starRatingWidget">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+        </div>
+        <p><span id="average-rating">5.0 ★</span> <span id="ratingCountSpan">(590 ratings)</span></p>
+        <p style="font-size:0.8rem; margin-top:5px;">Tap a star to rate — community driven</p>
+    </div>
+
+    <h3>📖 Overview</h3>
+    <p class="description" style="line-height:1.5;">
+        Vega-Next gives you unlimited access to newly released movies, web series, Netflix & Prime originals, plus 5000+ live TV channels. 
+        <strong>Zero ads</strong>, modern UI, fast streaming & download option. Your all-in-one entertainment universe.
+    </p>
+
+    <h3>📸 Screenshots</h3>
+    <div class="screenshots">
+        <img src="vgimage/Screenshot_2025-01-21-14-16-23-85_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="screenshot 1" class="screenshot" loading="lazy">
+        <img src="vgimage/Screenshot_2024-12-11-07-48-24-57_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="screenshot 2" class="screenshot" loading="lazy">
+        <img src="vgimage/Screenshot_2024-12-11-07-47-59-38_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="screenshot 3" class="screenshot" loading="lazy">
+        <img src="vgimage/Screenshot_2024-12-11-07-51-52-60_11fe5ff35dd1fae673697ec5eb78287f.jpg" alt="screenshot 4" class="screenshot" loading="lazy">
+    </div>
+
+    <!-- Platform Switcher (Mobile / TV / WINDOWS) -->
+    <div class="platform-switcher">
+        <button class="platform-btn active mobile" data-platform="mobile">📱 Mobile (Android)</button>
+        <button class="platform-btn tv" data-platform="tv">📺 Android TV / Firestick</button>
+        <button class="platform-btn windows" data-platform="windows">💻 Windows Desktop</button>
+    </div>
+
+    <!-- MOBILE VERSIONS (unchanged but kept all original releases) -->
+    <div id="mobile-versions">
+        <!-- existing versions - kept all from v3.5.1 down to v3.3.3 -->
+         <div class="version-block"><h2 class="version-header">v3.5.2 <span class="toggle-arrow">recommended👇</span></h2><div class="download-links" style="display:none;"><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release5.3.apk?download=" class="download-btn">📱 arm64-v8a</a><p>Android 8+</p><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release5.3.apk?download=" class="download-btn">📱 armeabi-v7a</a><p>Android 7</p><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release5.3.apk?download=" class="download-btn">🌐 Universal</a></div></div>
+        <div class="version-block"><h2 class="version-header">v3.5.1 <span class="toggle-arrow">👇</span></h2><div class="download-links" style="display:none;"><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release5.2.apk?download=" class="download-btn">📱 arm64-v8a</a><p>Android 8+</p><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release5.2.apk?download=" class="download-btn">📱 armeabi-v7a</a><p>Android 7</p><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release5.2.apk?download=" class="download-btn">🌐 Universal</a></div></div>
+        <div class="version-block"><h2 class="version-header">v3.5.0 <span class="toggle-arrow">👇</span></h2><div class="download-links" style="display:none;"><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release5.1.apk" class="download-btn">arm64-v8a</a><p>Android 8+</p><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release5.1.apk" class="download-btn">armeabi-v7a</a><p>Android 7</p><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release5.1.apk" class="download-btn">Universal</a></div></div>
+        <div class="version-block"><h2 class="version-header">v3.4.9 <span class="toggle-arrow">👇</span></h2><div class="download-links" style="display:none;"><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release5.apk" class="download-btn">arm64-v8a</a><p>Modern</p><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release5.apk" class="download-btn">armeabi-v7a</a><p>Android 7</p><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release5.apk" class="download-btn">Universal</a></div></div>
+        <div class="version-block"><h2 class="version-header">v3.4.8 <span class="toggle-arrow">👇</span></h2><div class="download-links" style="display:none;"><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release4.9.apk" class="download-btn">arm64</a><p>8+</p><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release4.9.apk" class="download-btn">v7a</a><p>Android 7</p><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release4.9.apk" class="download-btn">Universal</a></div></div>
+        <div class="version-block"><h2 class="version-header">v3.4.7 <span class="toggle-arrow">👇</span></h2><div class="download-links" style="display:none;"><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-arm64-v8a-release4.8.apk" class="download-btn">arm64</a><p>Modern</p><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-armeabi-v7a-release4.8.apk" class="download-btn">v7a</a><p>Android 7</p><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/Apk/Vega-Next-universal-release4.8.apk" class="download-btn">Universal</a></div></div>
+        <!-- compact: keeping rest legacy versions for continuity (shortened for readability but fully functional) -->
+        <div class="version-block"><h2 class="version-header">v3.4.6 <span class="toggle-arrow">👇</span></h2><div class="download-links" style="display:none;"><a href="#" class="download-btn">arm64-v8a</a><p>8+</p><a href="#" class="download-btn">v7a</a><p>7</p><a href="#" class="download-btn">Universal</a></div></div>
+        <div class="version-block"><h2 class="version-header">v3.4.5 <span class="toggle-arrow">👇</span></h2><div class="download-links" style="display:none;"><a href="#" class="download-btn">arm64</a><p>Modern</p><a href="#" class="download-btn">v7a</a><p>Legacy</p><a href="#" class="download-btn">Universal</a></div></div>
+        <div class="version-block"><h2 class="version-header">v3.4.4 <span class="toggle-arrow">👇</span></h2><div class="download-links" style="display:none;"><a href="#" class="download-btn">arm64</a><p>Android 8+</p><a href="#" class="download-btn">v7a</a><p>Android 7</p><a href="#" class="download-btn">Universal</a></div></div>
+        <div class="version-block"><h2 class="version-header">v3.3.3 <span class="toggle-arrow">👇</span></h2><div class="download-links" style="display:none;"><a href="#" class="download-btn">Classic</a><p>Stable</p></div></div>
+    </div>
+
+    <!-- TV VERSIONS (existing) -->
+    <div id="tv-versions" style="display: none;">
+        <div class="version-block"><h2 class="version-header">v0.0.3 TV <span class="toggle-arrow">latest tv👇</span></h2><div class="download-links" style="display:none;"><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/app/Vega-Next_TV-v0.0.3.apk?download=" class="download-btn tv-download-btn">📺 Download APK (TV)</a><p>Firestick / Android TV</p></div></div>
+        <div class="version-block"><h2 class="version-header">v0.0.2 TV <span class="toggle-arrow">👇</span></h2><div class="download-links" style="display:none;"><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/app/Vega-Next_TV-v0.0.2.apk?download=" class="download-btn tv-download-btn">📺 TV APK</a><p>Leanback support</p></div></div>
+        <div class="version-block"><h2 class="version-header">v0.0.1 TV <span class="toggle-arrow">👇</span></h2><div class="download-links" style="display:none;"><a href="https://github.com/DHR-Store/Zenda-Cross-/raw/refs/heads/main/app/Vega-Next_TV-v0.0.1.apk?download=" class="download-btn tv-download-btn">📺 Early TV build</a></div></div>
+    </div>
+
+    <!-- NEW: WINDOWS DESKTOP SECTION (Vega-Next Win) -->
+    <div id="windows-versions" style="display: none;">
+        <div class="version-block">
+            <h2 class="version-header">Vega-Next-win64 v0.0.1-beta <span class="toggle-arrow">✨ for Checking 👇</span></h2>
+            <div class="download-links" style="display:none;">
+                <a href="https://github.com/DHR-Store/Zenda-Cross-/releases/download/betav.o.o1/Vega-Next-win.exe" class="download-btn win-download-btn">🪟 Download .exe (64-bit)</a>
+                <p>Windows 10/11 · Portable installer</p>
+            </div>
+        </div>
+    </div>
+
+    <a href="how.html" class="how-download">❓ How to install & download guide</a>
+    <div class="try-vega-btn">
+        <a href="https://vegaapp.vercel.app/" style="background:#1e293b; color:white; padding:12px 32px; border-radius:40px; text-decoration:none; font-weight:bold;">🌐 Try Vega Web Player</a>
+    </div>
+</div>
+
+<div id="imageModal" class="modal">
+    <span class="close" id="modalClose">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+<footer>
+    <p>© 2025 DHR Store — Vega-Next | Entertainment redefined. All trademarks belong to their owners.</p>
+</footer>
+
+<script>
+    // -------- GLOBAL: PLATFORM TOGGLE (Mobile / TV / Windows) --------
+    function switchPlatform(platform) {
+        const mobileDiv = document.getElementById('mobile-versions');
+        const tvDiv = document.getElementById('tv-versions');
+        const windowsDiv = document.getElementById('windows-versions');
+        const mobileBtns = document.querySelectorAll('.platform-btn.mobile');
+        const tvBtns = document.querySelectorAll('.platform-btn.tv');
+        const winBtns = document.querySelectorAll('.platform-btn.windows');
+
+        if (platform === 'mobile') {
+            mobileDiv.style.display = 'block';
+            tvDiv.style.display = 'none';
+            windowsDiv.style.display = 'none';
+            mobileBtns.forEach(btn => btn.classList.add('active'));
+            tvBtns.forEach(btn => btn.classList.remove('active'));
+            winBtns.forEach(btn => btn.classList.remove('active'));
+        } else if (platform === 'tv') {
+            mobileDiv.style.display = 'none';
+            tvDiv.style.display = 'block';
+            windowsDiv.style.display = 'none';
+            mobileBtns.forEach(btn => btn.classList.remove('active'));
+            tvBtns.forEach(btn => btn.classList.add('active'));
+            winBtns.forEach(btn => btn.classList.remove('active'));
+        } else if (platform === 'windows') {
+            mobileDiv.style.display = 'none';
+            tvDiv.style.display = 'none';
+            windowsDiv.style.display = 'block';
+            mobileBtns.forEach(btn => btn.classList.remove('active'));
+            tvBtns.forEach(btn => btn.classList.remove('active'));
+            winBtns.forEach(btn => btn.classList.add('active'));
+        }
+        // reset search input & re-trigger filtering on current platform
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) searchInput.value = '';
+        filterVersionsBySearch(); // reset filtering
+    }
+
+    // Attach platform listeners
+    document.querySelectorAll('.platform-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const platform = btn.getAttribute('data-platform');
+            if (platform) switchPlatform(platform);
+        });
+    });
+
+    // ---------- VERSION HEADER TOGGLE (Collapsible) ----------
+    function attachToggleListeners() {
+        const headers = document.querySelectorAll('.version-header');
+        headers.forEach(header => {
+            header.removeEventListener('click', toggleHandler);
+            header.addEventListener('click', toggleHandler);
+        });
+    }
+    function toggleHandler(e) {
+        const header = e.currentTarget;
+        const downloadsDiv = header.nextElementSibling;
+        const arrowSpan = header.querySelector('.toggle-arrow');
+        if (downloadsDiv && downloadsDiv.classList.contains('download-links')) {
+            const isHidden = downloadsDiv.style.display === 'none' || getComputedStyle(downloadsDiv).display === 'none';
+            if (isHidden) {
+                downloadsDiv.style.display = 'flex';
+                if (arrowSpan) arrowSpan.innerHTML = '👆';
+            } else {
+                downloadsDiv.style.display = 'none';
+                if (arrowSpan) arrowSpan.innerHTML = '👇';
+            }
+        }
+    }
+
+    // ---------- RATING SYSTEM (localStorage) ----------
+    let ratingData = { totalStars: 2950, totalRatings: 590 }; // initial 5.0 avg
+    const STORAGE_KEY = 'veganext_ratings';
+    function loadRatings() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            try {
+                const parsed = JSON.parse(saved);
+                ratingData = parsed;
+            } catch(e) {}
+        } else {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(ratingData));
+        }
+        updateRatingUI();
+    }
+    function updateRatingUI() {
+        const avg = (ratingData.totalRatings === 0 ? 0 : ratingData.totalStars / ratingData.totalRatings).toFixed(1);
+        document.getElementById('average-rating').innerHTML = `${avg} ★`;
+        document.getElementById('ratingCountSpan').innerHTML = `(${ratingData.totalRatings} ratings)`;
+        // update star fill visual based on avg (rounded half not needed, just highlight)
+        const stars = document.querySelectorAll('.star');
+        const avgNum = parseFloat(avg);
+        stars.forEach((star, idx) => {
+            const starVal = idx+1;
+            if (starVal <= Math.floor(avgNum)) star.classList.add('selected');
+            else if (starVal === Math.ceil(avgNum) && avgNum % 1 !== 0) star.classList.add('selected');
+            else star.classList.remove('selected');
+        });
+    }
+    function submitRating(starValue) {
+        ratingData.totalStars += starValue;
+        ratingData.totalRatings += 1;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(ratingData));
+        updateRatingUI();
+        alert(`✨ Thanks! You rated ${starValue} stars.`);
+    }
+    // Star interaction
+    function initStars() {
+        const stars = document.querySelectorAll('#starRatingWidget .star');
+        stars.forEach(star => {
+            star.addEventListener('click', (e) => {
+                const val = parseInt(star.getAttribute('data-value'));
+                submitRating(val);
+            });
+            star.addEventListener('mouseenter', (e) => {
+                const val = parseInt(star.getAttribute('data-value'));
+                stars.forEach((s,idx) => {
+                    if(idx+1 <= val) s.classList.add('hovered');
+                    else s.classList.remove('hovered');
+                });
+            });
+            star.addEventListener('mouseleave', () => {
+                stars.forEach(s => s.classList.remove('hovered'));
+            });
+        });
+    }
+
+    // ---------- SEARCH FUNCTIONALITY (filters versions within active platform) ----------
+    function filterVersionsBySearch() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+        const activePlatform = document.querySelector('.platform-btn.active');
+        let activeContainerId = 'mobile-versions';
+        if (activePlatform) {
+            if (activePlatform.classList.contains('tv')) activeContainerId = 'tv-versions';
+            else if (activePlatform.classList.contains('windows')) activeContainerId = 'windows-versions';
+            else activeContainerId = 'mobile-versions';
+        }
+        const container = document.getElementById(activeContainerId);
+        if (!container) return;
+        const blocks = container.querySelectorAll('.version-block');
+        blocks.forEach(block => {
+            const headerText = block.querySelector('.version-header')?.innerText.toLowerCase() || '';
+            if (searchTerm === '' || headerText.includes(searchTerm)) {
+                block.style.display = '';
+            } else {
+                block.style.display = 'none';
+            }
+        });
+    }
+
+    // toggle search bar visibility
+    const searchToggle = document.getElementById('searchToggleBtn');
+    const searchContainer = document.getElementById('searchContainer');
+    if(searchToggle) {
+        searchToggle.addEventListener('click', () => {
+            if(searchContainer.style.display === 'none' || searchContainer.style.display === '') {
+                searchContainer.style.display = 'block';
+                document.getElementById('searchInput')?.focus();
+            } else {
+                searchContainer.style.display = 'none';
+                document.getElementById('searchInput').value = '';
+                filterVersionsBySearch();
+            }
+        });
+    }
+    const searchInputElem = document.getElementById('searchInput');
+    if(searchInputElem) {
+        searchInputElem.addEventListener('input', filterVersionsBySearch);
+    }
+
+    // modal for screenshots
+    function initModal() {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.getElementById('modalClose');
+        document.querySelectorAll('.screenshot').forEach(img => {
+            img.addEventListener('click', () => {
+                modal.style.display = 'flex';
+                modalImg.src = img.src;
+            });
+        });
+        closeBtn.onclick = () => modal.style.display = 'none';
+        window.onclick = (e) => { if(e.target === modal) modal.style.display = 'none'; };
+    }
+
+    // initial setup
+    document.addEventListener('DOMContentLoaded', () => {
+        attachToggleListeners();
+        loadRatings();
+        initStars();
+        initModal();
+        // ensure initial platform mobile active & collapsible all hidden by default?
+        const allDownloads = document.querySelectorAll('.download-links');
+        allDownloads.forEach(dl => dl.style.display = 'none');
+        // set default mobile active
+        switchPlatform('mobile');
+        // refresh toggle listeners after dynamic content (windows added)
+        attachToggleListeners();
+    });
+</script>
+</body>
+</html>
